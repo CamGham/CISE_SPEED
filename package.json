@@ -1,8 +1,12 @@
 {
   "scripts": {
+    "prepare-backend": "cd backend && npm install",
+    "prepare-frontend": "cd frontend && npm install",
+    "build-frontend": "cd frontend && npm run build",
     "start": "node backend/app.js",
     "app": "nodemon backend/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm run prepare-frontend && npm run build-frontend"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

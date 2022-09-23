@@ -4,6 +4,9 @@ var cors = require('cors');
 
 const app = express();
 
+//Port
+const port = process.env.PORT || 8082;
+
 // Connect Database
 connectDB();
 
@@ -13,8 +16,20 @@ app.use(cors({ origin: true, credentials: true }));
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('Hello world2!'));
+// app.get('/', (req, res) => res.send('Hello world2!'));
 
-const port = process.env.PORT || 8082;
+
+
+connectDB();
+if (process.env.NODE_ENV === 'production') {
+  // serve front-end client from build folder
+  app.use(express.static(__dirname+'/front-end/build'));
+  app.get('*', (req, res) =>{
+    res.sendFile(__dirname+'/front-end/build/index.html')
+  });
+  
+} else {
+  app.get('/', (req, res) => res.send(`API running on port ${port}`));
+}
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
