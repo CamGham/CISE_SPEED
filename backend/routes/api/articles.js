@@ -5,6 +5,7 @@ const router = express.Router();
 const subArticle = require('../../models/subArticle');
 
 //create article
+// @route GET api/articles
 router.post('/', (req, res) =>{
     subArticle.create(req.Body)
     .then(subarticle => res.json({msg: 'Article submitted successfully'}))

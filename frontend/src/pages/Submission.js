@@ -1,21 +1,51 @@
 import React, {useState} from 'react';
-import { useForm} from "react-hook-form";
+import axios from "axios";
+
 
 const Submission = () => {
-    const { register, handleSubmit} = useForm();
-    const [result, setResult] = useState("");
-    const onSubmit = (data) => setResult(JSON.stringify(data));
+    // const { register, handleSubmit} = useForm();
+    // const [result, setResult] = useState("");
+    // const onSubmit = (data) => setResult(JSON.stringify(data));
+
+  const initialValues = {
+    title: '',
+    authors: '',
+    journal: '',
+    year: '',
+    volume: '',
+    pages: '',
+    doi: ''
+  }
+
+  const [values, setValues] = useState(initialValues);
+
+  const handleChange = (e) => {
+    setValues({...values, [e.target.name]: e.target.value});
+  };
+
+  const onSubmit = () =>{
+console.log(values)
+
+    axios
+    .post('http://localhost:8082/api/articles', values)
+    .then(res => {
+      setValues(initialValues)
+    })
+    .catch(err => {
+      console.log("error when submitting");
+    })
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("title")} placeholder="Title"/>
-        <input {...register("authors")} placeholder="Author"/>
-        <input {...register("journal")} placeholder="Journal"/>
-        <input {...register("year")} placeholder="Year"/>
-        <input {...register("volume")} placeholder="Volume"/>
-        <input {...register("version")} placeholder="Version"/>
-        <input {...register("pages")} placeholder="Pages"/>
-        <input {...register("doi")} placeholder="Doi"/>
+    <form onSubmit={onSubmit}>
+        <input type='text' placeholder="Title" name='title' value={values.title} onChange={handleChange}/>
+        <input type='text' placeholder="Authors" name='authors' value={values.authors} onChange={handleChange}/>
+        <input type='text' placeholder="Journal"/>
+        <input type='text'placeholder="Year"/>
+        <input type='text' placeholder="Volume"/>
+        <input type='text' placeholder="Version"/>
+        <input type='text' placeholder="Pages"/>
+        <input type='text' placeholder="Doi"/>
         <input type="submit"/>
     </form>
   );
