@@ -24,11 +24,12 @@ const Submission = () => {
   };
 
   const onSubmit = () =>{
-console.log(values)
+    console.log(values)
 
     axios
     .post('http://localhost:8082/api/articles', values)
     .then(res => {
+      console.log("resetting form");
       setValues(initialValues)
     })
     .catch(err => {
@@ -40,12 +41,12 @@ console.log(values)
     <form onSubmit={onSubmit}>
         <input type='text' placeholder="Title" name='title' value={values.title} onChange={handleChange}/>
         <input type='text' placeholder="Authors" name='authors' value={values.authors} onChange={handleChange}/>
-        <input type='text' placeholder="Journal"/>
-        <input type='text'placeholder="Year"/>
-        <input type='text' placeholder="Volume"/>
-        <input type='text' placeholder="Version"/>
-        <input type='text' placeholder="Pages"/>
-        <input type='text' placeholder="Doi"/>
+        <input type='text' placeholder="Journal" name='journal' values={values.journal} onChange={handleChange}/>
+        <input type='text'placeholder="Year" name='year' values={values.year} onChange={handleChange}/>
+        <input type='text' placeholder="Volume" name='volume' values={values.volume} onChange={handleChange}/>
+        <input type='text' placeholder="Version" name='version' values={values.version} onChange={handleChange}/>
+        <input type='text' placeholder="Pages" name='pages' values={values.pages} onChange={handleChange}/>
+        <input type='text' placeholder="Doi" name='doi' values={values.doi} onChange={handleChange}/>
         <input type="submit"/>
     </form>
   );

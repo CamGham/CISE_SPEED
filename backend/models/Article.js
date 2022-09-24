@@ -17,7 +17,7 @@ const ArticleSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    volvume:{
+    volume:{
         type:Number,
         required:true
     },
@@ -35,4 +35,4 @@ const ArticleSchema = new mongoose.Schema({
     }
 });
 
-module.exports = subArticle = mongoose.model('subarticle', ArticleSchema);
+module.exports = Article = mongoose.model('article', ArticleSchema);
