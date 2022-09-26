@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import TestArticleItem from '../components/TestArticleItem';
+import {Link} from "react-router-dom";
 
 const ArticleDisplay = () => {
     const [articles, setArticles] = useState([]);
-    let articleList;
+    // let articleList = useRef();
 
     const getArticles = async () =>{
         await axios
@@ -41,6 +42,7 @@ const ArticleDisplay = () => {
         //         })
         
         // }
+        // articleList.current = "no articles";
 
 
     }, [])
@@ -48,11 +50,19 @@ const ArticleDisplay = () => {
   return (
     <div>
         <h1>Display</h1>
-        {articleList}
-        {/* {articles && 
+        <div>
+        <Link to="/">
+            Home
+        </Link>
+        </div>
+        {/* {articleList} */}
+        {articles && 
         articles.forEach((article, index) => {
+            console.log(article);
+            console.log(index);
             <TestArticleItem article={article} index={index}/>
-        })} */}
+            console.log("craeted");
+        })}
     </div>
   )
 }

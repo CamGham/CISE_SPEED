@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 
 const Submission = () => {
@@ -38,17 +39,44 @@ const Submission = () => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <div className="doc">
+      <h1>Article Submission</h1>
+      <div>
+        <Link to="/">
+            Home
+        </Link>
+        </div>
+
+    <form onSubmit={onSubmit} className="form">
+      <div>
         <input type='text' placeholder="Title" name='title' value={values.title} onChange={handleChange}/>
+        </div>
+        <div>
         <input type='text' placeholder="Authors" name='authors' value={values.authors} onChange={handleChange}/>
+        </div>
+        <div>
         <input type='text' placeholder="Journal" name='journal' values={values.journal} onChange={handleChange}/>
+        </div>
+        <div>
         <input type='text'placeholder="Year" name='year' values={values.year} onChange={handleChange}/>
+        </div>
+        <div>
         <input type='text' placeholder="Volume" name='volume' values={values.volume} onChange={handleChange}/>
+        </div>
+        <div>
         <input type='text' placeholder="Version" name='version' values={values.version} onChange={handleChange}/>
+        </div>
+        <div>
         <input type='text' placeholder="Pages" name='pages' values={values.pages} onChange={handleChange}/>
+        </div>
+        <div>
         <input type='text' placeholder="Doi" name='doi' values={values.doi} onChange={handleChange}/>
+        </div>
+        <div>
         <input type="submit"/>
+        </div>
     </form>
+    </div>
   );
 }
 
