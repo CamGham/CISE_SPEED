@@ -1,20 +1,29 @@
 import { DataGrid } from '@mui/x-data-grid';
-import React from 'react';
 
 export const TableGrid = (props) => {
-  const { articles } = props;
+  const {
+    articles,
+    titleShow,
+    authorShow,
+    journalShow,
+    volumeShow,
+    versionShow,
+    pagesShow,
+    yearShow,
+    doiShow,
+  } = props;
 
   // define table columns
   const columns = [
     { field: 'id', headerName: 'ID', hide: true },
-    { field: 'title', headerName: 'Title', width: 300 },
-    { field: 'authors', headerName: 'Authors', width: 300 },
-    { field: 'journal', headerName: 'Journal', width: 300 },
-    { field: 'volume', headerName: 'Volume', width: 100 },
-    { field: 'version', headerName: 'Version', width: 100 },
-    { field: 'pages', headerName: 'Pages', width: 100 },
-    { field: 'year', headerName: 'Year', width: 100 },
-    { field: 'doi', headerName: 'DOI', width: 100 },
+    { field: 'title', headerName: 'Title', width: 300, hide: titleShow },
+    { field: 'authors', headerName: 'Authors', width: 300, hide: authorShow },
+    { field: 'journal', headerName: 'Journal', width: 300, hide: journalShow },
+    { field: 'volume', headerName: 'Volume', width: 100, hide: volumeShow },
+    { field: 'version', headerName: 'Version', width: 100, hide: versionShow },
+    { field: 'pages', headerName: 'Pages', width: 100, hide: pagesShow },
+    { field: 'year', headerName: 'Year', width: 100, hide: yearShow },
+    { field: 'doi', headerName: 'DOI', width: 100, hide: doiShow },
   ];
 
   // set article data under their respective table column name
