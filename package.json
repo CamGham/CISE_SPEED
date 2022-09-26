@@ -9,6 +9,10 @@
     "heroku-postbuild": "npm run prepare-frontend && npm run build-frontend"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.6",
+    "@mui/x-data-grid": "^5.17.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "config": "^3.3.8",
