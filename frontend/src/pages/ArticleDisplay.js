@@ -2,7 +2,14 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TableGrid } from '../components/TableGrid';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import {
+  Checkbox,
+  FormControlLabel,
+  Select,
+  FormControl,
+  MenuItem,
+  InputLabel,
+} from '@mui/material';
 
 const ArticleDisplay = () => {
   const [articles, setArticles] = useState([]);
@@ -64,6 +71,41 @@ const ArticleDisplay = () => {
         <Link to="/">Home</Link>
       </div>
       <div>
+        <FormControl sx={{ m: 1, minWidth: 100 }}>
+          <InputLabel id="practice-dropdown">Practice</InputLabel>
+          <Select
+            labelId="practice-dropdown"
+            id="practice-dropdown"
+            // value={age}
+            label="Practice"
+            // onChange={handleChange}
+          >
+            <MenuItem value={10}>TDD</MenuItem>
+            <MenuItem value={20}>BDD</MenuItem>
+            <MenuItem value={30}>ATDD</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl  sx={{ m: 1, minWidth: 85 }}>
+          <InputLabel id="claim-dropdown">Claim</InputLabel>
+          <Select
+            labelId="claim-dropdown"
+            id="claim-dropdown"
+            // value={age}
+            label="Claim"
+            autoWidth
+            // onChange={handleChange}
+          >
+            <MenuItem value={10}>Improves product quality</MenuItem>
+            <MenuItem value={20}>Improves code quality</MenuItem>
+            <MenuItem value={30}>Improves team confidence</MenuItem>
+          </Select>
+        </FormControl>
+        <input placeholder='from'></input>
+        -
+        <input placeholder='to'></input>
+        <button>show</button>
+      </div>
+      <div>
         <TableGrid
           articles={articles}
           titleShow={!titleShow}
@@ -74,6 +116,7 @@ const ArticleDisplay = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
+          
         />
       </div>
       <div>

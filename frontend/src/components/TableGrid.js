@@ -40,7 +40,7 @@ export const TableGrid = (props) => {
   }));
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid rows={rows} columns={columns} autoHeight={true} disableColumnMenu={true} density={'compact'} pageSize={4} />
     </div>
   );
 };
