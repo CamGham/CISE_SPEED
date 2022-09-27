@@ -25,7 +25,7 @@ const ArticleApprove = () => {
 
   const getArticles = async () => {
     await axios
-      .get('http://localhost:8082/api/articles')
+      .get('http://localhost:8082/api/articles.articles')
       .then((res) => {
         console.log(res.data);
         setArticles(res.data);
@@ -116,6 +116,7 @@ const ArticleApprove = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
+          
         />
       </div>
       <div>
@@ -164,7 +165,6 @@ const ArticleApprove = () => {
           label="DOI"
           control={<Checkbox checked={doiShow} onChange={handleDoiChange} />}
         />
-        
       </div>
     </div>
   );

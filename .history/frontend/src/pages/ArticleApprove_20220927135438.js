@@ -21,6 +21,7 @@ const ArticleApprove = () => {
   const [pagesShow, setPagesShow] = useState(true);
   const [yearShow, setYearShow] = useState(true);
   const [doiShow, setDoiShow] = useState(true);
+  const [moderatedShow, setmoderatedShow] = useState(true);
   // let articleList = useRef();
 
   const getArticles = async () => {
@@ -62,6 +63,10 @@ const ArticleApprove = () => {
   };
   const handleDoiChange = (event) => {
     setDoiShow(event.target.checked);
+  };
+
+  const handleModeratedChange = (event) => {
+    setModeratedShow(event.target.checked);
   };
 
   return (
@@ -116,6 +121,8 @@ const ArticleApprove = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
+          moderatedShow={!moderatedShow}
+          
         />
       </div>
       <div>
@@ -164,7 +171,10 @@ const ArticleApprove = () => {
           label="DOI"
           control={<Checkbox checked={doiShow} onChange={handleDoiChange} />}
         />
-        
+        <FormControlLabel
+          label="Moderated"
+          control={<Checkbox checked={moderatedShow} onChange={handleModeratedChange} />}
+        />
       </div>
     </div>
   );

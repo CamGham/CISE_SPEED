@@ -11,6 +11,7 @@ export const TableGrid = (props) => {
     pagesShow,
     yearShow,
     doiShow,
+    moderatedShow,
   } = props;
 
   // define table columns
@@ -24,6 +25,7 @@ export const TableGrid = (props) => {
     { field: 'pages', headerName: 'Pages', width: 100, hide: pagesShow },
     { field: 'year', headerName: 'Year', width: 100, hide: yearShow },
     { field: 'doi', headerName: 'DOI', width: 100, hide: doiShow },
+    { field: 'moderated', headerName: 'moderated', width: 100, hide: moderatedShow },
   ];
 
   // set article data under their respective table column name
@@ -37,6 +39,7 @@ export const TableGrid = (props) => {
     pages: row.pages,
     year: row.year,
     doi: row.doi,
+    moderated: row.moderated,
   }));
   return (
     <div style={{ height: 400, width: '100%' }}>

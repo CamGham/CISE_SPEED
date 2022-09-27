@@ -116,6 +116,7 @@ const ArticleApprove = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
+          
         />
       </div>
       <div>
@@ -164,7 +165,6 @@ const ArticleApprove = () => {
           label="DOI"
           control={<Checkbox checked={doiShow} onChange={handleDoiChange} />}
         />
-        
       </div>
     </div>
   );
