@@ -12,20 +12,22 @@ export const TableGrid = (props) => {
     yearShow,
     doiShow,
     moderatedShow,
+    approvedShow,
   } = props;
 
   // define table columns
   const columns = [
     { field: 'id', headerName: 'ID', hide: true },
     { field: 'title', headerName: 'Title', width: 300, hide: titleShow },
-    { field: 'authors', headerName: 'Authors', width: 300, hide: authorShow },
-    { field: 'journal', headerName: 'Journal', width: 300, hide: journalShow },
+    { field: 'authors', headerName: 'Authors', width: 200, hide: authorShow },
+    { field: 'journal', headerName: 'Journal', width: 200, hide: journalShow },
     { field: 'volume', headerName: 'Volume', width: 100, hide: volumeShow },
     { field: 'version', headerName: 'Version', width: 100, hide: versionShow },
     { field: 'pages', headerName: 'Pages', width: 100, hide: pagesShow },
     { field: 'year', headerName: 'Year', width: 100, hide: yearShow },
     { field: 'doi', headerName: 'DOI', width: 100, hide: doiShow },
     { field: 'moderated', headerName: 'moderated', width: 100, hide: moderatedShow },
+    { field: 'approved', headerName: 'approved', width: 100, hide: approvedShow },
   ];
 
   // set article data under their respective table column name
@@ -40,6 +42,7 @@ export const TableGrid = (props) => {
     year: row.year,
     doi: row.doi,
     moderated: row.moderated,
+    approved: row.approved,
   }));
   return (
     <div style={{ height: 400, width: '100%' }}>
