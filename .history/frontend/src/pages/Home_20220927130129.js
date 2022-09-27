@@ -16,7 +16,7 @@ const Home = () => {
         </Link>
         </div>
         <div>
-        <Link to="/showArticles">
+        <Link to="/approveArticle">
             Approve an Article - Moderator only
         </Link>
         </div>

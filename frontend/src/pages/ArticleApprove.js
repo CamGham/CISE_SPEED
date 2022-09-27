@@ -11,7 +11,7 @@ import {
   InputLabel,
 } from '@mui/material';
 
-const ArticleDisplay = () => {
+const ArticleApprove = () => {
   const [articles, setArticles] = useState([]);
   const [titleShow, setTitleShow] = useState(true);
   const [authorShow, setAuthorShow] = useState(true);
@@ -66,7 +66,7 @@ const ArticleDisplay = () => {
 
   return (
     <div>
-      <h1>Display</h1>
+      <h1>Article Moderation Display</h1>
       <div>
         <Link to="/">Home</Link>
       </div>
@@ -170,4 +170,4 @@ const ArticleDisplay = () => {
   );
 };
 
-export default ArticleDisplay;
+export default ArticleApprove;
