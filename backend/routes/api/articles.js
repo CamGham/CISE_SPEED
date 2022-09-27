@@ -31,11 +31,11 @@ router.get('/', (req, res) => {
 // @route GET api/articles/:status
 // @description retrieves articles by status field
 // @access Public
-router.get('/:status', async (req, res) => {
+router.get('/:semethod', async (req, res) => {
   const artStatus = req.params;
 
   console.log(artStatus);
-  const data = await Article.find({ status: artStatus.status });
+  const data = await Article.find({ semethod: artStatus.semethod });
   res.json(data);
 });
 

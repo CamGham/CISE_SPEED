@@ -21,7 +21,7 @@ const ArticleDisplay = () => {
   const [pagesShow, setPagesShow] = useState(true);
   const [yearShow, setYearShow] = useState(true);
   const [doiShow, setDoiShow] = useState(true);
-  // let articleList = useRef();
+  const [seMethod, setSeMethod] = useState('');
 
   const getArticles = async () => {
     await axios
@@ -33,10 +33,24 @@ const ArticleDisplay = () => {
         console.log('error');
       });
   };
+  const getArticlesByMethod = async () => {
+    await axios
+      .get('http://localhost:8082/api/articles/' + seMethod)
+      .then((res) => {
+        setArticles(res.data);
+      })
+      .catch((err) => {
+        console.log('error');
+      });
+  };
 
   useEffect(() => {
     getArticles();
   }, []);
+
+  useEffect(() => {
+    getArticlesByMethod();
+  }, [seMethod]);
 
   const handleTitleChange = (event) => {
     setTitleShow(event.target.checked);
@@ -62,6 +76,12 @@ const ArticleDisplay = () => {
   const handleDoiChange = (event) => {
     setDoiShow(event.target.checked);
   };
+  const handleMethodChange = (event) => {
+    // setDoiShow(event.target.checked);
+    let selected = event.target.value;
+
+    setSeMethod(selected);
+  };
 
   return (
     <div>
@@ -74,34 +94,40 @@ const ArticleDisplay = () => {
          * dropdowns div
          */}
         <FormControl sx={{ m: 1, minWidth: 100 }}>
-          <InputLabel id="practice-dropdown">Practice</InputLabel>
+          <InputLabel id="practice-dropdown">SE-Method</InputLabel>
           <Select
-            labelId="practice-dropdown"
-            id="practice-dropdown"
-            // value={age}
-            label="Practice"
-            // onChange={handleChange}
+            labelId="semethod-dropdown"
+            id="semethod-dropdown"
+            value={seMethod}
+            label="semethod"
+            onChange={handleMethodChange}
           >
-            <MenuItem value={10}>TDD</MenuItem>
-            <MenuItem value={20}>BDD</MenuItem>
-            <MenuItem value={30}>ATDD</MenuItem>
+            <MenuItem value={'tdd'}>TDD</MenuItem>
+            <MenuItem value={'bdd'}>BDD</MenuItem>
+            <MenuItem value={'atdd'}>ATDD</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 85 }}>
+        {/* <FormControl sx={{ m: 1, minWidth: 85 }}>
           <InputLabel id="claim-dropdown">Claim</InputLabel>
           <Select
             labelId="claim-dropdown"
             id="claim-dropdown"
-            // value={age}
+            // value={claim}
             label="Claim"
             autoWidth
-            // onChange={handleChange}
+            // onChange={handleClaimChange}
           >
-            <MenuItem value={10}>Improves product quality</MenuItem>
-            <MenuItem value={20}>Improves code quality</MenuItem>
-            <MenuItem value={30}>Improves team confidence</MenuItem>
+            <MenuItem value={'Improves product quality'}>
+              Improves product quality
+            </MenuItem>
+            <MenuItem value={'Improves code quality'}>
+              Improves code quality
+            </MenuItem>
+            <MenuItem value={'Improves team confidence'}>
+              Improves team confidence
+            </MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
       </div>
       <div>
         {/**

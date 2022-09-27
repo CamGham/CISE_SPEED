@@ -37,6 +37,9 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  semethod: {
+    type: String,
+  },
 });
 
 module.exports = Article = mongoose.model('article', ArticleSchema);
