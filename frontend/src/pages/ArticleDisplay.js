@@ -27,7 +27,6 @@ const ArticleDisplay = () => {
     await axios
       .get('http://localhost:8082/api/articles')
       .then((res) => {
-        console.log(res.data);
         setArticles(res.data);
       })
       .catch((err) => {
@@ -71,6 +70,9 @@ const ArticleDisplay = () => {
         <Link to="/">Home</Link>
       </div>
       <div>
+        {/**
+         * dropdowns div
+         */}
         <FormControl sx={{ m: 1, minWidth: 100 }}>
           <InputLabel id="practice-dropdown">Practice</InputLabel>
           <Select
@@ -85,7 +87,7 @@ const ArticleDisplay = () => {
             <MenuItem value={30}>ATDD</MenuItem>
           </Select>
         </FormControl>
-        <FormControl  sx={{ m: 1, minWidth: 85 }}>
+        <FormControl sx={{ m: 1, minWidth: 85 }}>
           <InputLabel id="claim-dropdown">Claim</InputLabel>
           <Select
             labelId="claim-dropdown"
@@ -100,12 +102,19 @@ const ArticleDisplay = () => {
             <MenuItem value={30}>Improves team confidence</MenuItem>
           </Select>
         </FormControl>
-        <input placeholder='from'></input>
-        -
-        <input placeholder='to'></input>
+      </div>
+      <div>
+        {/**
+         * years filter div
+         */}
+        <b>years: </b>
+        <input placeholder="from"></input>-<input placeholder="to"></input>
         <button>show</button>
       </div>
       <div>
+        {/**
+         * data table div
+         */}
         <TableGrid
           articles={articles}
           titleShow={!titleShow}
@@ -116,10 +125,12 @@ const ArticleDisplay = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
-          
         />
       </div>
       <div>
+        {/**
+         * checkbox filter div
+         */}
         <h3>Filters</h3>
         <FormControlLabel
           label="Title"
