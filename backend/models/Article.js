@@ -37,6 +37,26 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  semethod: {
+    type: String,
+    required: false,
+  },
+  claim: {
+    type: String,
+    required: false,
+  },
+  result: {
+    type: Boolean,
+    required: true,
+  },
+  research: {
+    type: String,
+    required: false,
+  },
+  participant: {
+    type: String,
+    required: false,
+  },
 });
 
 module.exports = Article = mongoose.model('article', ArticleSchema);

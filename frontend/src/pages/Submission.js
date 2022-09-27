@@ -14,8 +14,15 @@ const Submission = () => {
     journal: '',
     year: '',
     volume: '',
+    version: '',
     pages: '',
-    doi: ''
+    doi: '',
+    status: 'pending',
+    semethod: '',
+    claim: '',
+    result: true,
+    research: '',
+    participant: ''
   }
 
   const [values, setValues] = useState(initialValues);
