@@ -77,7 +77,6 @@ const ArticleDisplay = () => {
     setDoiShow(event.target.checked);
   };
   const handleMethodChange = (event) => {
-    // setDoiShow(event.target.checked);
     let selected = event.target.value;
 
     setSeMethod(selected);
@@ -102,6 +101,7 @@ const ArticleDisplay = () => {
             label="semethod"
             onChange={handleMethodChange}
           >
+            <MenuItem value={' '}>Show all</MenuItem>
             <MenuItem value={'tdd'}>TDD</MenuItem>
             <MenuItem value={'bdd'}>BDD</MenuItem>
             <MenuItem value={'atdd'}>ATDD</MenuItem>
