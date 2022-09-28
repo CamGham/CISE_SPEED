@@ -1,14 +1,9 @@
-import React, { useRef, useState} from 'react';
-import axios from "axios";
-import {Link} from "react-router-dom";
-import bibtexParse from "@orcid/bibtex-parse-js";
-
+import React, { useRef, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import bibtexParse from '@orcid/bibtex-parse-js';
 
 const Submission = () => {
-    // const { register, handleSubmit} = useForm();
-    // const [result, setResult] = useState("");
-    // const onSubmit = (data) => setResult(JSON.stringify(data));
-
   const initialValues = {
     title: '',
     authors: '',
@@ -23,9 +18,8 @@ const Submission = () => {
     claim: '',
     result: true,
     research: '',
-    participant: ''
-  }
-  
+    participant: '',
+  };
 
   const [values, setValues] = useState(initialValues);
   const titleRef = useRef();
@@ -36,101 +30,170 @@ const Submission = () => {
   const versionRef = useRef();
   const pagesRef = useRef();
   const doiRef = useRef();
-  // const [extractInfo, setExtractInfo] = useState(null);
 
+  // called when typing in input fields 
   const handleChange = (e) => {
-    setValues({...values, [e.target.name]: e.target.value});
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = () =>{
-    console.log(values)
-
+  //submission of form
+  const onSubmit = () => {
     axios
-    .post('http://localhost:8082/api/articles', values)
-    .then(res => {
-      console.log("resetting form");
-      setValues(initialValues)
-    })
-    .catch(err => {
-      console.log("error when submitting");
-    })
-  }
+      .post('http://localhost:8082/api/articles', values)
+      .then((res) => {
+        console.log('resetting form');
+        setValues(initialValues);
+      })
+      .catch((err) => {
+        console.log('error when submitting');
+      });
+  };
 
+  //upload bibtex file
   const handleUpload = async (e) => {
     const fileReader = new FileReader();
-    fileReader.onload = async (e) =>{
+
+    // read method
+    fileReader.onload = async (e) => {
       //extract text
-      const text = (e.target.result);
+      const text = e.target.result;
       //conver to JSON
       var data = bibtexParse.toJSON(text);
-
-      // console.log(data[0].entryTags);
       //ref to fields
       const article = data[0].entryTags;
 
       // issues with different formats
+      // place values in fields
       titleRef.current.value = article.TITLE;
       authorRef.current.value = article.AUTHOR;
       journalRef.current.value = article.JOURNAL;
       yearRef.current.value = article.YEAR;
       volumeRef.current.value = article.VOLUME;
       versionRef.current.value = article.NUMBER;
-      // pagesRef.current.value = article.pages;
+      pagesRef.current.value = article.PAGES;
       doiRef.current.value = article.DOI;
-    }
-    fileReader.readAsText(e.target.files[0]);
-  }
 
-  
+      // set values
+      const newValues = {
+        title: article.TITLE,
+        authors: article.AUTHOR,
+        journal: article.JOURNAL,
+        year: article.YEAR,
+        volume: article.VOLUME,
+        version: article.NUMBER,
+        pages: article.PAGES,
+        doi: article.DOI,
+        status: 'pending',
+        semethod: '',
+        claim: '',
+        result: true,
+        research: '',
+        participant: '',
+      };
+      setValues(newValues);
+    };
+    //read file
+    fileReader.readAsText(e.target.files[0]);
+  };
+
+  const show = () => {
+    console.log(values);
+  };
 
   return (
     <div className="doc">
       <h1>Article Submission</h1>
       <div>
-        <Link to="/">
-            Home
-        </Link>
-        </div>
+        <Link to="/">Home</Link>
+      </div>
 
-    <form onSubmit={onSubmit} className="form" onChange={handleUpload}>
-      <div>
+      <form onSubmit={onSubmit} className="form" onChange={handleUpload}>
         <div>
-
-        <label>
-          Bibtex file:
-        <input type='file' name ="file"/>
-
-        </label>
-        </div>
-        <input type='text' placeholder="Title" name='title' ref={titleRef} value={values.title} onChange={handleChange}/>
-        </div>
-        <div>
-        <input type='text' placeholder="Authors" name='authors' ref={authorRef} value={values.authors} onChange={handleChange}/>
-        </div>
-        <div>
-        <input type='text' placeholder="Journal" name='journal' ref={journalRef} values={values.journal} onChange={handleChange}/>
+          <div>
+            <label>
+              Bibtex file:
+              <input type="file" name="file" />
+            </label>
+          </div>
+          <input
+            type="text"
+            placeholder="Title"
+            name="title"
+            ref={titleRef}
+            onChange={handleChange}
+          />
         </div>
         <div>
-        <input type='text'placeholder="Year" name='year' ref={yearRef} values={values.year} onChange={handleChange}/>
+          <input
+            type="text"
+            placeholder="Authors"
+            name="authors"
+            ref={authorRef}
+            onChange={handleChange}
+          />
         </div>
         <div>
-        <input type='text' placeholder="Volume" name='volume' ref={volumeRef} values={values.volume} onChange={handleChange}/>
+          <input
+            type="text"
+            placeholder="Journal Name"
+            name="journal"
+            ref={journalRef}
+            onChange={handleChange}
+          />
         </div>
         <div>
-        <input type='text' placeholder="Version" name='version' ref={versionRef} values={values.version} onChange={handleChange}/>
+          <input
+            type="text"
+            placeholder="Pub. Year"
+            name="year"
+            ref={yearRef}
+            values={values.year}
+            onChange={handleChange}
+          />
         </div>
         <div>
-        <input type='text' placeholder="Pages" name='pages' ref={pagesRef} values={values.pages} onChange={handleChange}/>
+          <input
+            type="text"
+            placeholder="Volume"
+            name="volume"
+            ref={volumeRef}
+            onChange={handleChange}
+          />
         </div>
         <div>
-        <input type='text' placeholder="Doi" name='doi' ref={doiRef} values={values.doi} onChange={handleChange}/>
+          <input
+            type="text"
+            placeholder="Version"
+            name="version"
+            ref={versionRef}
+            onChange={handleChange}
+          />
         </div>
         <div>
-        <input type="submit"/>
+          <input
+            type="text"
+            placeholder="Pages"
+            name="pages"
+            ref={pagesRef}
+            onChange={handleChange}
+          />
         </div>
-    </form>
+        <div>
+          <input
+            type="text"
+            placeholder="Doi"
+            name="doi"
+            ref={doiRef}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input type="button" onClick={show} />
+          <input type="submit" />
+        </div>
+      </form>
     </div>
   );
-}
+};
 
-export default Submission
+export default Submission;
