@@ -5,7 +5,7 @@
     "build-frontend": "cd frontend && npm run build",
     "start": "node backend/app.js",
     "app": "nodemon backend/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd frontend && npm test",
     "heroku-postbuild": "npm run prepare-frontend && npm run build-frontend"
   },
   "dependencies": {
