@@ -39,4 +39,6 @@ h1 {
 }
 .nav {
   text-decoration: none;
+  color: black;
+  font-size: large;
 }
