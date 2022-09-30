@@ -33,7 +33,7 @@ const SubForm = () => {
       year: Yup.number().required('Required'),
       volume: Yup.number().required('Required'),
       version: Yup.number().required('Required'),
-      pages: Yup.number().required('Required'),
+      pages: Yup.string().required('Required'),
       doi: Yup.string().required('Required'),
     }),
     //on submission of form

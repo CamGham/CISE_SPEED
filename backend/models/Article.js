@@ -26,7 +26,7 @@ const ArticleSchema = new mongoose.Schema({
     required: true,
   },
   pages: {
-    type: Number,
+    type: String,
     required: true,
   },
   doi: {
