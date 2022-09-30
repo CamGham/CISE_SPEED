@@ -39,6 +39,17 @@ router.get('/:semethod', async (req, res) => {
   res.json(data);
 });
 
+// @route GET api/articles/:status
+// @description retrieves articles by moderation status
+// @access Public
+router.get('/:status', async (req, res) => {
+  const artModStatus = req.params;
+
+  console.log(artModStatus);
+  const data = await Article.find({ status: artModStatus.status });
+  res.json(data);
+});
+
 // @route GET api/articles
 // @description create article
 // @access Public

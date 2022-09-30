@@ -35,7 +35,6 @@ const ArticleSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    required: true,
   },
   semethod: {
     type: String,

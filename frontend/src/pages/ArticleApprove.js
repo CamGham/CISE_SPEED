@@ -21,13 +21,22 @@ const ArticleApprove = () => {
   const [pagesShow, setPagesShow] = useState(true);
   const [yearShow, setYearShow] = useState(true);
   const [doiShow, setDoiShow] = useState(true);
-  // let articleList = useRef();
+  const [seStatus, setSeStatus] = useState('');
 
   const getArticles = async () => {
     await axios
       .get('http://localhost:8082/api/articles')
       .then((res) => {
-        console.log(res.data);
+        setArticles(res.data);
+      })
+      .catch((err) => {
+        console.log('error');
+      });
+  };
+  const getArticlesByStatus = async () => {
+    await axios
+      .get('http://localhost:8082/api/articles/' + seStatus)
+      .then((res) => {
         setArticles(res.data);
       })
       .catch((err) => {
@@ -38,6 +47,10 @@ const ArticleApprove = () => {
   useEffect(() => {
     getArticles();
   }, []);
+
+  useEffect(() => {
+    getArticlesByStatus();
+  }, [seStatus]);
 
   const handleTitleChange = (event) => {
     setTitleShow(event.target.checked);
@@ -63,6 +76,11 @@ const ArticleApprove = () => {
   const handleDoiChange = (event) => {
     setDoiShow(event.target.checked);
   };
+  const handleStatusChange = (event) => {
+    let selected = event.target.value;
+
+    setSeStatus(selected);
+  };
 
   return (
     <div>
@@ -71,41 +89,58 @@ const ArticleApprove = () => {
         <Link to="/">Home</Link>
       </div>
       <div>
+        {/**
+         * dropdowns div
+         */}
         <FormControl sx={{ m: 1, minWidth: 100 }}>
-          <InputLabel id="practice-dropdown">Practice</InputLabel>
+          <InputLabel id="moderation-dropdown">Moderation Status</InputLabel>
           <Select
-            labelId="practice-dropdown"
-            id="practice-dropdown"
-            // value={age}
-            label="Practice"
-            // onChange={handleChange}
+            labelId="sestatus-dropdown"
+            id="sestatus-dropdown"
+            value={seStatus}
+            label="sestatus"
+            onChange={handleStatusChange}
           >
-            <MenuItem value={10}>TDD</MenuItem>
-            <MenuItem value={20}>BDD</MenuItem>
-            <MenuItem value={30}>ATDD</MenuItem>
+            <MenuItem value={' '}>Show all</MenuItem>
+            <MenuItem value={'pending'}>Pending</MenuItem>
+            <MenuItem value={'accepted'}>Accepted</MenuItem>
+            <MenuItem value={'rejected'}>Rejected</MenuItem>
           </Select>
         </FormControl>
-        <FormControl  sx={{ m: 1, minWidth: 85 }}>
+        {/* <FormControl sx={{ m: 1, minWidth: 85 }}>
           <InputLabel id="claim-dropdown">Claim</InputLabel>
           <Select
             labelId="claim-dropdown"
             id="claim-dropdown"
-            // value={age}
+            // value={claim}
             label="Claim"
             autoWidth
-            // onChange={handleChange}
+            // onChange={handleClaimChange}
           >
-            <MenuItem value={10}>Improves product quality</MenuItem>
-            <MenuItem value={20}>Improves code quality</MenuItem>
-            <MenuItem value={30}>Improves team confidence</MenuItem>
+            <MenuItem value={'Improves product quality'}>
+              Improves product quality
+            </MenuItem>
+            <MenuItem value={'Improves code quality'}>
+              Improves code quality
+            </MenuItem>
+            <MenuItem value={'Improves team confidence'}>
+              Improves team confidence
+            </MenuItem>
           </Select>
-        </FormControl>
-        <input placeholder='from'></input>
-        -
-        <input placeholder='to'></input>
+        </FormControl> */}
+      </div>
+      <div>
+        {/**
+         * years filter div
+         */}
+        <b>years: </b>
+        <input placeholder="from"></input>-<input placeholder="to"></input>
         <button>show</button>
       </div>
       <div>
+        {/**
+         * data table div
+         */}
         <TableGrid
           articles={articles}
           titleShow={!titleShow}
@@ -119,6 +154,9 @@ const ArticleApprove = () => {
         />
       </div>
       <div>
+        {/**
+         * checkbox filter div
+         */}
         <h3>Filters</h3>
         <FormControlLabel
           label="Title"
@@ -164,7 +202,6 @@ const ArticleApprove = () => {
           label="DOI"
           control={<Checkbox checked={doiShow} onChange={handleDoiChange} />}
         />
-        
       </div>
     </div>
   );
