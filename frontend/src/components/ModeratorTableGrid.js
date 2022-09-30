@@ -40,7 +40,9 @@ export const ModeratorTableGrid = (props) => {
     { field: "approve", headerName: 'Approve', width: 100,
       renderCell: (cellValues) => {
         return (
-          <button id="approveBtn" onclick="getElementById('demo')">Approve</button>
+          <button id="approveBtn" onClick={(event) => {
+            handleClick(event, cellValues);
+          }}>Approve</button>
         );
       }
     },
@@ -48,7 +50,9 @@ export const ModeratorTableGrid = (props) => {
     { field: "reject", headerName: 'Reject', width: 100,
     renderCell: (cellValues) => {
       return (
-        <button id="rejectBtn" onclick="getElementById('demo')">Reject</button>
+        <button id="rejectBtn" onClick={(event) => {
+            handleClick(event, cellValues);
+          }}>Reject</button>
       );
     }
   }
