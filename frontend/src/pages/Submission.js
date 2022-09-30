@@ -17,7 +17,9 @@ const Submission = () => {
         </Link>
         </div>
       </div>
+      <div className='formCon'>
       <SubForm />
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import SubForm from './SubForm';
+import SubForm from '../SubForm';
 import userEvent from '@testing-library/user-event';
 
 test('validation of leaving field without input', async () => {

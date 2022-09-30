@@ -7,10 +7,6 @@ body {
 .doc {
   width: 100%;
 }
-h1 {
-  padding-left: 50px;
-  padding-right: 50px;
-}
 .navButton {
   display: flex;
   justify-content: center;
@@ -41,4 +37,9 @@ h1 {
   text-decoration: none;
   color: black;
   font-size: large;
+}
+.formCon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
