@@ -3,6 +3,7 @@ import axios from 'axios';
 import bibtexParse from '@orcid/bibtex-parse-js';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import './SubForm.css';
 
 const SubForm = () => {
   //formik form
@@ -45,6 +46,7 @@ const SubForm = () => {
         .catch((err) => {
           console.log('error when submitting: ' + err);
         });
+      // alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -83,13 +85,11 @@ const SubForm = () => {
   };
   return (
     <form onSubmit={formik.handleSubmit} className="form">
-      <div>
-        <div>
-          <label>
-            Bibtex file:
-            <input type="file" name="file" onChange={handleUpload} />
-          </label>
-        </div>
+      <div className='bibtex'>
+        <input type="file" name="file" id="file" onChange={handleUpload} className="fileupload"/>
+        <label for="file" className='upload'>Upload Bibtex File</label>
+      </div>
+      <div className="field">
         <input
           type="text"
           placeholder="Title"
@@ -99,10 +99,10 @@ const SubForm = () => {
           value={formik.values.title}
         />
         {formik.touched.title && formik.errors.title ? (
-          <div>{formik.errors.title}</div>
+          <div className="error">{formik.errors.title}</div>
         ) : null}
       </div>
-      <div>
+      <div className="field">
         <input
           type="text"
           placeholder="Authors"
@@ -112,10 +112,10 @@ const SubForm = () => {
           value={formik.values.authors}
         />
         {formik.touched.authors && formik.errors.authors ? (
-          <div>{formik.errors.authors}</div>
+          <div className="error">{formik.errors.authors}</div>
         ) : null}
       </div>
-      <div>
+      <div className="field">
         <input
           type="text"
           placeholder="Journal Name"
@@ -125,10 +125,10 @@ const SubForm = () => {
           value={formik.values.journal}
         />
         {formik.touched.journal && formik.errors.journal ? (
-          <div>{formik.errors.journal}</div>
+          <div className="error">{formik.errors.journal}</div>
         ) : null}
       </div>
-      <div>
+      <div className="field">
         <input
           type="text"
           placeholder="Pub. Year"
@@ -138,10 +138,10 @@ const SubForm = () => {
           value={formik.values.year}
         />
         {formik.touched.year && formik.errors.year ? (
-          <div>{formik.errors.year}</div>
+          <div className="error">{formik.errors.year}</div>
         ) : null}
       </div>
-      <div>
+      <div className="field">
         <input
           type="text"
           placeholder="Volume"
@@ -151,10 +151,10 @@ const SubForm = () => {
           value={formik.values.volume}
         />
         {formik.touched.volume && formik.errors.volume ? (
-          <div>{formik.errors.volume}</div>
+          <div className="error">{formik.errors.volume}</div>
         ) : null}
       </div>
-      <div>
+      <div className="field">
         <input
           type="text"
           placeholder="Version"
@@ -164,10 +164,10 @@ const SubForm = () => {
           value={formik.values.version}
         />
         {formik.touched.version && formik.errors.version ? (
-          <div>{formik.errors.version}</div>
+          <div className="error">{formik.errors.version}</div>
         ) : null}
       </div>
-      <div>
+      <div className="field">
         <input
           type="text"
           placeholder="Pages"
@@ -177,10 +177,10 @@ const SubForm = () => {
           value={formik.values.pages}
         />
         {formik.touched.pages && formik.errors.pages ? (
-          <div>{formik.errors.pages}</div>
+          <div className="error">{formik.errors.pages}</div>
         ) : null}
       </div>
-      <div>
+      <div className="field">
         <input
           type="text"
           placeholder="Doi"
@@ -190,10 +190,10 @@ const SubForm = () => {
           value={formik.values.doi}
         />
         {formik.touched.doi && formik.errors.doi ? (
-          <div>{formik.errors.doi}</div>
+          <div className="error">{formik.errors.doi}</div>
         ) : null}
       </div>
-      <div>
+      <div className="submit">
         <input type="submit" />
       </div>
     </form>

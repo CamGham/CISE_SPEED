@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SubForm from '../components/SubForm';
+import './Submission.css';
 
 const Submission = () => {
  
@@ -8,7 +9,13 @@ const Submission = () => {
     <div className="doc">
       <h1>Article Submission</h1>
       <div>
-        <Link to="/">Home</Link>
+        <div className='navContainer'>
+        <Link to="/" className='nav'>
+          <div className='navButton'>
+            Home
+          </div>
+        </Link>
+        </div>
       </div>
       <SubForm />
     </div>
