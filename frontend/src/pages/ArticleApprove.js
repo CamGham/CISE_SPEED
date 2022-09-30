@@ -21,6 +21,8 @@ const ArticleApprove = () => {
   const [pagesShow, setPagesShow] = useState(true);
   const [yearShow, setYearShow] = useState(true);
   const [doiShow, setDoiShow] = useState(true);
+
+  
   const [seStatus, setSeStatus] = useState('');
 
   const getArticles = async () => {
@@ -188,6 +190,8 @@ const ArticleApprove = () => {
           label="DOI"
           control={<Checkbox checked={doiShow} onChange={handleDoiChange} />}
         />
+
+        
       </div>
     </div>
   );
