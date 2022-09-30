@@ -1,8 +1,6 @@
 import { render, screen, waitFor, act } from '@testing-library/react';
 import SubForm from './SubForm';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
-import { Experimental_CssVarsProvider } from '@mui/material';
 
 test('validation of leaving field without input', async () => {
   render(<SubForm />);
@@ -39,27 +37,17 @@ test('validation should pass', async () => {
   });
 });
 
-// test('validation of empty fields', async () => {
-//   render(<SubForm />);
+test('validation of empty fields', async () => {
+  render(<SubForm />);
 
-//   const user = userEvent;
-//   const submitButton = screen.getByRole('button', {
-//     name: /submit/i,
-//   });
+  const user = userEvent;
+  const submitButton = screen.getByRole('button', {
+    name: /submit/i,
+  });
 
-//   user.click(submitButton);
+  user.click(submitButton);
 
-//   await waitFor(() => {
-//     expect(screen.getByText('Required')).toBeInTheDocument();
-//   });
-// });
-
-// test('type in a field', async() => {
-//     render(<SubForm />);
-//     const user  = userEvent;
-
-//       await user.click(screen.getByPlaceholderText(/Title/i));
-//       await user.click(screen.getByPlaceholderText(/Authors/i));
-//       await expect(screen.getByText(/Required/i)).toBeInTheDocument();
-
-//   });
+  await waitFor(() => {
+    expect(screen.getAllByText('Required')).toHaveLength(8);
+  });
+});
