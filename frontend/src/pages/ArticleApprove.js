@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { TableGrid } from '../components/TableGrid';
+import { ModeratorTableGrid } from '../components/ModeratorTableGrid';
 import {
   Checkbox,
   FormControlLabel,
@@ -33,24 +33,10 @@ const ArticleApprove = () => {
         console.log('error');
       });
   };
-  const getArticlesByStatus = async () => {
-    await axios
-      .get('http://localhost:8082/api/articles/' + seStatus)
-      .then((res) => {
-        setArticles(res.data);
-      })
-      .catch((err) => {
-        console.log('error');
-      });
-  };
 
   useEffect(() => {
     getArticles();
   }, []);
-
-  useEffect(() => {
-    getArticlesByStatus();
-  }, [seStatus]);
 
   const handleTitleChange = (event) => {
     setTitleShow(event.target.checked);
@@ -141,7 +127,7 @@ const ArticleApprove = () => {
         {/**
          * data table div
          */}
-        <TableGrid
+        <ModeratorTableGrid
           articles={articles}
           titleShow={!titleShow}
           authorShow={!authorShow}
