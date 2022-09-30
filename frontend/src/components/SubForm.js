@@ -58,25 +58,54 @@ const SubForm = () => {
       const text = e.target.result;
       //conver to JSON
       var data = bibtexParse.toJSON(text);
+
       //ref to fields
       const article = data[0].entryTags;
-      // set values
-      const newValues = {
-        title: article.TITLE,
-        authors: article.AUTHOR,
-        journal: article.JOURNAL,
-        year: article.YEAR,
-        volume: article.VOLUME,
-        version: article.NUMBER,
-        pages: article.PAGES,
-        doi: article.DOI,
-        status: 'pending',
-        semethod: '',
-        claim: '',
-        result: true,
-        research: '',
-        participant: '',
-      };
+
+      //set values
+      var newValues;
+      if (article.title === undefined)
+        newValues = {
+          title: article.TITLE,
+          authors: article.AUTHOR,
+          journal: article.JOURNAL,
+          year: article.YEAR,
+          volume: article.VOLUME,
+          version: article.NUMBER,
+          pages: article.PAGES,
+          doi: article.DOI,
+          status: 'pending',
+          semethod: '',
+          claim: '',
+          result: true,
+          research: '',
+          participant: '',
+        };
+      else
+        newValues = {
+          title: article.title,
+          authors: article.author,
+          journal: article.journal,
+          year: article.year,
+          volume: article.volume,
+          version: article.number,
+          pages: article.pages,
+          doi: article.doi,
+          status: 'pending',
+          semethod: '',
+          claim: '',
+          result: true,
+          research: '',
+          participant: '',
+        };
+
+      //set undefined values to empty strings
+      for (const key in newValues) {
+        if (newValues[key] === undefined) {
+          newValues[key] = '';
+        }
+      }
+
       formik.setValues(newValues);
       formik.handleChange();
     };
@@ -85,116 +114,143 @@ const SubForm = () => {
   };
   return (
     <form onSubmit={formik.handleSubmit} className="form">
-      <div className='bibtex'>
-        <input type="file" name="file" id="file" onChange={handleUpload} className="fileupload"/>
-        <label for="file" className='upload'>Upload Bibtex File</label>
-      </div>
-      <div className="field">
+      <div className="bibtex">
         <input
-          type="text"
-          placeholder="Title"
-          name="title"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.title}
+          type="file"
+          name="file"
+          id="file"
+          onChange={handleUpload}
+          className="fileupload"
         />
-        {formik.touched.title && formik.errors.title ? (
-          <div className="error">{formik.errors.title}</div>
-        ) : null}
+        <label for="file" className="upload">
+          Upload Bibtex File
+        </label>
       </div>
-      <div className="field">
-        <input
-          type="text"
-          placeholder="Authors"
-          name="authors"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.authors}
-        />
-        {formik.touched.authors && formik.errors.authors ? (
-          <div className="error">{formik.errors.authors}</div>
-        ) : null}
-      </div>
-      <div className="field">
-        <input
-          type="text"
-          placeholder="Journal Name"
-          name="journal"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.journal}
-        />
-        {formik.touched.journal && formik.errors.journal ? (
-          <div className="error">{formik.errors.journal}</div>
-        ) : null}
-      </div>
-      <div className="field">
-        <input
-          type="text"
-          placeholder="Pub. Year"
-          name="year"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.year}
-        />
-        {formik.touched.year && formik.errors.year ? (
-          <div className="error">{formik.errors.year}</div>
-        ) : null}
-      </div>
-      <div className="field">
-        <input
-          type="text"
-          placeholder="Volume"
-          name="volume"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.volume}
-        />
-        {formik.touched.volume && formik.errors.volume ? (
-          <div className="error">{formik.errors.volume}</div>
-        ) : null}
-      </div>
-      <div className="field">
-        <input
-          type="text"
-          placeholder="Version"
-          name="version"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.version}
-        />
-        {formik.touched.version && formik.errors.version ? (
-          <div className="error">{formik.errors.version}</div>
-        ) : null}
-      </div>
-      <div className="field">
-        <input
-          type="text"
-          placeholder="Pages"
-          name="pages"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.pages}
-        />
-        {formik.touched.pages && formik.errors.pages ? (
-          <div className="error">{formik.errors.pages}</div>
-        ) : null}
-      </div>
-      <div className="field">
-        <input
-          type="text"
-          placeholder="Doi"
-          name="doi"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.doi}
-        />
-        {formik.touched.doi && formik.errors.doi ? (
-          <div className="error">{formik.errors.doi}</div>
-        ) : null}
-      </div>
-      <div className="submit">
-        <input type="submit" />
+      <div className="container">
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Title"
+            name="title"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.title}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.title && formik.errors.title ? (
+            <div className="error">{formik.errors.title}</div>
+          ) : null}
+        </div>
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Authors"
+            name="authors"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.authors}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.authors && formik.errors.authors ? (
+            <div className="error">{formik.errors.authors}</div>
+          ) : null}
+        </div>
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Journal Name"
+            name="journal"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.journal}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.journal && formik.errors.journal ? (
+            <div className="error">{formik.errors.journal}</div>
+          ) : null}
+        </div>
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Pub. Year"
+            name="year"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.year}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.year && formik.errors.year ? (
+            <div className="error">{formik.errors.year}</div>
+          ) : null}
+        </div>
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Volume"
+            name="volume"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.volume}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.volume && formik.errors.volume ? (
+            <div className="error">{formik.errors.volume}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Version"
+            name="version"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.version}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.version && formik.errors.version ? (
+            <div className="error">{formik.errors.version}</div>
+          ) : null}
+        </div>
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Pages"
+            name="pages"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.pages}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.pages && formik.errors.pages ? (
+            <div className="error">{formik.errors.pages}</div>
+          ) : null}
+        </div>
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Doi"
+            name="doi"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.doi}
+          />
+        </div>
+        <div className="errCon">
+          {formik.touched.doi && formik.errors.doi ? (
+            <div className="error">{formik.errors.doi}</div>
+          ) : null}
+        </div>
+        <div className="submit">
+          <input type="submit" />
+        </div>
       </div>
     </form>
   );

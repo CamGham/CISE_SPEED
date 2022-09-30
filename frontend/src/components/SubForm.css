@@ -1,34 +1,41 @@
 .form {
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.container {
+  display: grid;
+  grid-template-columns: [first] 20% [second] auto[third] 20% [fourth];
+  grid-template-rows: repeat(10, 11% [col-start]);
+}
 .field {
-  display: flex;
-  flex-direction: row;
-  width: 60%;
+  /* justify-self: center; */
+  grid-column-start: second;
+  grid-column-end: third;
+  justify-self: center;
+  width: 100%;
   height: 40px;
   border-radius: 10px;
   border-width: 2px;
   border-color: rgba(255, 255, 255, 0.1);
   border-style: solid;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 1);
   transition: 0.3s all;
   margin: 5px;
 }
 .field:hover {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
 }
 .field:focus-within {
   border-color: #ea748e;
 }
 input {
-  width: 80%;
+  width: 95%;
   height: 100%;
-  padding: 0px 16px;
+  padding: 0px 12px;
   border: none;
   font-size: 16px;
   font-weight: 400;
@@ -40,15 +47,20 @@ input {
   -webkit-appearance: none; */
 }
 .error {
-  position: relative;
   font-size: 20px;
   font-weight: 600;
-  left: 90px;
-  top: 5px;
+  padding-left: 5px;
+}
+.errCon {
+  grid-column-start: third;
+  grid-column-end: fourth;
+  justify-self: center;
+  align-self: center;
 }
 .submit {
-  display: flex;
-  justify-content: center;
+  grid-column-start: second;
+  grid-column-end: third;
+  justify-self: center;
   /* align-items: center; */
   /* flex-direction: row; */
   width: 40%;
@@ -67,7 +79,7 @@ input {
   cursor: pointer;
 }
 .submit:hover {
-  background-color: rgba(234, 116, 142, 0.8);
+  background-color: #8eea74;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
 }
 .fileupload {
@@ -102,4 +114,5 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 30%;
 }
