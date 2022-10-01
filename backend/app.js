@@ -3,6 +3,8 @@ const cors = require('cors');
 const connectDB = require('../config/db');
 
 const app = express();
+//routes
+const articles = require('./routes/api/articles');
 
 // Port
 const port = process.env.PORT || 8082;
@@ -13,7 +15,8 @@ app.use(cors({ origin: true, credentials: true }));
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-// app.get('/', (req, res) => res.send('Hello world2!'));
+//using route
+app.use('/api/articles', articles)
 
 // Connect Database
 connectDB();
