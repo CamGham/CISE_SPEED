@@ -94,13 +94,13 @@ const ArticleDisplay = () => {
   };
 
   return (
+ 
     <div className='doc'>
-    <div >
+      <div className='navCont'>
       <h1>Display</h1>
-      <div>
         <Link to="/">Home</Link>
       </div>
-      <div >
+      <div className='dropdownCont'>
         <FormControl sx={{ m: 1, minWidth: 100 }}>
           <InputLabel id="practice-dropdown">SE-Method</InputLabel>
           <Select
@@ -139,12 +139,12 @@ const ArticleDisplay = () => {
           </Select>
         </FormControl>
       </div>
-      <div>
+      {/* <div className='yearsCont'>
         <b>years: </b>
         <input placeholder="from"></input>-<input placeholder="to"></input>
         <button>show</button>
-      </div>
-      <div>
+      </div> */}
+      <div className='tableCont'>
         <TableGrid
           articles={articles}
           titleShow={!titleShow}
@@ -155,9 +155,10 @@ const ArticleDisplay = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
+          
         />
       </div>
-      <div>
+      <div className='checkboxCont'>
         <h3>Filters</h3>
         <FormControlLabel
           label="Title"
@@ -205,7 +206,7 @@ const ArticleDisplay = () => {
         />
       </div>
     </div>
-    </div>
+
   );
 };
 

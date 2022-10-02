@@ -39,7 +39,7 @@ export const TableGrid = (props) => {
     doi: row.doi,
   }));
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: '100%', background: '#fffff' }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -48,6 +48,7 @@ export const TableGrid = (props) => {
         density={'compact'}
         pageSize={5}
         rowsPerPageOptions={[5, 10, 20]}
+        
       />
     </div>
   );

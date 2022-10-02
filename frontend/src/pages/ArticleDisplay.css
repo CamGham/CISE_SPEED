@@ -4,3 +4,24 @@
     align-items: center;
     /* justify-content: center; */
 }
+
+.navCont{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.yearsCont{
+    display: flex;
+
+}
+
+.tableCont{
+margin-top: 100px;
+    width: 50%;
+}
+
+.dropdownCont{
+    margin-top: 30px;
+}
