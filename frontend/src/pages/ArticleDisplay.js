@@ -10,6 +10,7 @@ import {
   MenuItem,
   InputLabel,
 } from '@mui/material';
+import './ArticleDisplay.css';
 
 const ArticleDisplay = () => {
   const [articles, setArticles] = useState([]);
@@ -93,12 +94,13 @@ const ArticleDisplay = () => {
   };
 
   return (
-    <div>
+    <div className='doc'>
+    <div >
       <h1>Display</h1>
       <div>
         <Link to="/">Home</Link>
       </div>
-      <div>
+      <div >
         <FormControl sx={{ m: 1, minWidth: 100 }}>
           <InputLabel id="practice-dropdown">SE-Method</InputLabel>
           <Select
@@ -202,6 +204,7 @@ const ArticleDisplay = () => {
           control={<Checkbox checked={yearShow} onChange={handleYearChange} />}
         />
       </div>
+    </div>
     </div>
   );
 };

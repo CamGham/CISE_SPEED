@@ -4,21 +4,16 @@ import SubForm from '../components/SubForm';
 import './Submission.css';
 
 const Submission = () => {
- 
   return (
     <div className="doc">
-      <h1>Article Submission</h1>
-      <div>
-        <div className='navContainer'>
-        <Link to="/" className='nav'>
-          <div className='navButton'>
-            Home
-          </div>
+      <div className="navCon">
+        <h1>Article Submission</h1>
+        <Link to="/" className="nav">
+          <div className="navButton">Home</div>
         </Link>
-        </div>
       </div>
-      <div className='formCon'>
-      <SubForm />
+      <div className="formCon">
+        <SubForm />
       </div>
     </div>
   );

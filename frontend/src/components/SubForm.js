@@ -114,7 +114,7 @@ const SubForm = () => {
   };
   return (
     <form onSubmit={formik.handleSubmit} className="form">
-      <div className="bibtex">
+      <div className="bibtexCont">
         <input
           type="file"
           name="file"
@@ -126,7 +126,8 @@ const SubForm = () => {
           Upload Bibtex File
         </label>
       </div>
-      <div className="container">
+      <p>or</p>
+      <div className="inputCont">
         <div className="field">
           <input
             type="text"
