@@ -26,7 +26,7 @@ const ArticleSchema = new mongoose.Schema({
     required: true,
   },
   pages: {
-    type: Number,
+    type: String,
     required: true,
   },
   doi: {
@@ -39,6 +39,23 @@ const ArticleSchema = new mongoose.Schema({
   },
   semethod: {
     type: String,
+    required: false,
+  },
+  claim: {
+    type: String,
+    required: false,
+  },
+  result: {
+    type: Boolean,
+    required: true,
+  },
+  research: {
+    type: String,
+    required: false,
+  },
+  participant: {
+    type: String,
+    required: false,
   },
 });
 
