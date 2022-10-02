@@ -16,12 +16,13 @@ const ArticleDisplay = () => {
   const [titleShow, setTitleShow] = useState(true);
   const [authorShow, setAuthorShow] = useState(true);
   const [journalShow, setJournalShow] = useState(true);
-  const [volumeShow, setVolumeShow] = useState(true);
-  const [versionShow, setVersionShow] = useState(true);
-  const [pagesShow, setPagesShow] = useState(true);
-  const [yearShow, setYearShow] = useState(true);
+  const [volumeShow, setVolumeShow] = useState(false);
+  const [versionShow, setVersionShow] = useState(false);
+  const [pagesShow, setPagesShow] = useState(false);
+  const [yearShow, setYearShow] = useState(false);
   const [doiShow, setDoiShow] = useState(true);
-  // let articleList = useRef();
+  const [seMethod, setSeMethod] = useState('');
+  const [claim, setClaim] = useState('');
 
   const getArticles = async () => {
     await axios
@@ -37,6 +38,27 @@ const ArticleDisplay = () => {
   useEffect(() => {
     getArticles();
   }, []);
+  const getArticlesByFilter = async () => {
+    const myUrl = new URL('http://localhost:8082/api/articles/filter');
+    if (seMethod !== '') {
+      myUrl.searchParams.append('semethod', seMethod);
+    }
+    if (claim !== '') {
+      myUrl.searchParams.append('claim', claim);
+    }
+    console.log(myUrl.href);
+    await axios
+      .get(myUrl)
+      .then((res) => {
+        setArticles(res.data);
+      })
+      .catch((err) => {
+        console.log('error');
+      });
+  };
+  useEffect(() => {
+    getArticlesByFilter();
+  }, [seMethod, claim]);
 
   const handleTitleChange = (event) => {
     setTitleShow(event.target.checked);
@@ -60,7 +82,14 @@ const ArticleDisplay = () => {
     setYearShow(event.target.checked);
   };
   const handleDoiChange = (event) => {
+    console.log(event);
     setDoiShow(event.target.checked);
+  };
+  const handleMethodChange = (event) => {
+    setSeMethod(event.target.value);
+  };
+  const handleClaimChange = (event) => {
+    setClaim(event.target.value);
   };
 
   return (
@@ -70,21 +99,19 @@ const ArticleDisplay = () => {
         <Link to="/">Home</Link>
       </div>
       <div>
-        {/**
-         * dropdowns div
-         */}
         <FormControl sx={{ m: 1, minWidth: 100 }}>
-          <InputLabel id="practice-dropdown">Practice</InputLabel>
+          <InputLabel id="practice-dropdown">SE-Method</InputLabel>
           <Select
-            labelId="practice-dropdown"
-            id="practice-dropdown"
-            // value={age}
-            label="Practice"
-            // onChange={handleChange}
+            labelId="semethod-dropdown"
+            id="semethod-dropdown"
+            value={seMethod}
+            label="semethod"
+            onChange={handleMethodChange}
           >
-            <MenuItem value={10}>TDD</MenuItem>
-            <MenuItem value={20}>BDD</MenuItem>
-            <MenuItem value={30}>ATDD</MenuItem>
+            <MenuItem value={''}>Show all</MenuItem>
+            <MenuItem value={'tdd'}>TDD</MenuItem>
+            <MenuItem value={'bdd'}>BDD</MenuItem>
+            <MenuItem value={'atdd'}>ATDD</MenuItem>
           </Select>
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 85 }}>
@@ -92,29 +119,30 @@ const ArticleDisplay = () => {
           <Select
             labelId="claim-dropdown"
             id="claim-dropdown"
-            // value={age}
+            value={claim}
             label="Claim"
             autoWidth
-            // onChange={handleChange}
+            onChange={handleClaimChange}
           >
-            <MenuItem value={10}>Improves product quality</MenuItem>
-            <MenuItem value={20}>Improves code quality</MenuItem>
-            <MenuItem value={30}>Improves team confidence</MenuItem>
+            <MenuItem value={''}>Show all</MenuItem>
+            <MenuItem value={'Improves product quality'}>
+              Improves product quality
+            </MenuItem>
+            <MenuItem value={'Improves code quality'}>
+              Improves code quality
+            </MenuItem>
+            <MenuItem value={'Improves team confidence'}>
+              Improves team confidence
+            </MenuItem>
           </Select>
         </FormControl>
       </div>
       <div>
-        {/**
-         * years filter div
-         */}
         <b>years: </b>
         <input placeholder="from"></input>-<input placeholder="to"></input>
         <button>show</button>
       </div>
       <div>
-        {/**
-         * data table div
-         */}
         <TableGrid
           articles={articles}
           titleShow={!titleShow}
@@ -128,9 +156,6 @@ const ArticleDisplay = () => {
         />
       </div>
       <div>
-        {/**
-         * checkbox filter div
-         */}
         <h3>Filters</h3>
         <FormControlLabel
           label="Title"
@@ -149,6 +174,10 @@ const ArticleDisplay = () => {
           control={
             <Checkbox checked={journalShow} onChange={handleJournalChange} />
           }
+        />
+        <FormControlLabel
+          label="DOI"
+          control={<Checkbox checked={doiShow} onChange={handleDoiChange} />}
         />
         <FormControlLabel
           label="Volume"
@@ -171,10 +200,6 @@ const ArticleDisplay = () => {
         <FormControlLabel
           label="Year"
           control={<Checkbox checked={yearShow} onChange={handleYearChange} />}
-        />
-        <FormControlLabel
-          label="DOI"
-          control={<Checkbox checked={doiShow} onChange={handleDoiChange} />}
         />
       </div>
     </div>

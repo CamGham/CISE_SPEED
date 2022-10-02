@@ -31,12 +31,12 @@ router.get('/', (req, res) => {
 // @route GET api/articles/:status
 // @description retrieves articles by status field
 // @access Public
-router.get('/:status', async (req, res) => {
-  const artStatus = req.params;
-
-  console.log(artStatus);
-  const data = await Article.find({ status: artStatus.status });
-  res.json(data);
+router.get('/filter', async (req, res) => {
+  Article.find(req.query)
+    .then((articles) => res.json(articles))
+    .catch((err) =>
+      res.status(404).json({ noarticlesfound: 'No articles found' })
+    );
 });
 
 // @route GET api/articles

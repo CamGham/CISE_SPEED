@@ -39,8 +39,16 @@ export const TableGrid = (props) => {
     doi: row.doi,
   }));
   return (
-    <div style={{ height: 400, width: '100%'}}>
-      <DataGrid rows={rows} columns={columns} autoHeight={true} disableColumnMenu={true} density={'compact'} pageSize={4} />
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        autoHeight={true}
+        disableColumnMenu={true}
+        density={'compact'}
+        pageSize={5}
+        rowsPerPageOptions={[5, 10, 20]}
+      />
     </div>
   );
 };

@@ -3,7 +3,7 @@ const cors = require('cors');
 const connectDB = require('../config/db');
 
 const app = express();
-//routes
+//  routes
 const articles = require('./routes/api/articles');
 
 // Port
@@ -15,8 +15,8 @@ app.use(cors({ origin: true, credentials: true }));
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-//using route
-app.use('/api/articles', articles)
+//  using route
+app.use('/api/articles', articles);
 
 // Connect Database
 connectDB();
