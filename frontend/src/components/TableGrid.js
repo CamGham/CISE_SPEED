@@ -47,7 +47,7 @@ export const TableGrid = (props) => {
         fontSize: 16
       },"& .MuiDataGrid-virtualScrollerRenderZone": {
         "& .MuiDataGrid-row": {
-          "&:nth-child(2n)": { backgroundColor: "rgba(235, 235, 235, .7)" }
+          "&:nth-of-type(2n)": { backgroundColor: "rgba(235, 235, 235, .7)" }
         }}}}
         rows={rows}
         columns={columns}

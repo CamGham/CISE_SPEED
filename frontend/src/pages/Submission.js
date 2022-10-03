@@ -10,7 +10,7 @@ const Submission = () => {
       <h1>Article Submission</h1>
       <div className="navCon">
         <Link to="/" className="nav">
-          <HomeIcon data-testid='home' style={{ 'font-size': '40px' }} />
+          <HomeIcon data-testid='home' style={{ 'fontSize': '40px' }} />
         </Link>
       </div>
       <div className="formCon">
