@@ -20,6 +20,11 @@ const Home = () => {
             Approve an Article - Moderator only
         </Link>
         </div>
+        <div>
+        <Link to="/newArticleApprove">
+            NEW Approve an Article - Moderator only
+        </Link>
+        </div>
     </div>
   )
 }

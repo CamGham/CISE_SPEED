@@ -29,6 +29,8 @@ const Submission = () => {
 
     axios
     .post('http://localhost:8082/api/articles', values)
+
+    
     .then(res => {
       console.log("resetting form");
       setValues(initialValues)

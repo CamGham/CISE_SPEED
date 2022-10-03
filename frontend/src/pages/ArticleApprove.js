@@ -2,23 +2,23 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ModeratorTableGrid } from '../components/ModeratorTableGrid';
-import {
-  Checkbox,
-  FormControlLabel,
-  Select,
-} from '@mui/material';
+// import {
+//   Checkbox,
+//   FormControlLabel,
+//   Select,
+// } from '@mui/material';
 
 const ArticleApprove = () => {
   const [articles, setArticles] = useState([]);
-  const [titleShow, setTitleShow] = useState(true);
-  const [authorShow, setAuthorShow] = useState(true);
-  const [journalShow, setJournalShow] = useState(true);
-  const [volumeShow, setVolumeShow] = useState(true);
-  const [versionShow, setVersionShow] = useState(true);
-  const [pagesShow, setPagesShow] = useState(true);
-  const [yearShow, setYearShow] = useState(true);
-  const [doiShow, setDoiShow] = useState(true);
-  const [statusShow, setStatusShow] = useState(true);
+  const [titleShow] = useState(true);
+  const [authorShow] = useState(true);
+  const [journalShow] = useState(true);
+  const [volumeShow] = useState(true);
+  const [versionShow] = useState(true);
+  const [pagesShow] = useState(true);
+  const [yearShow] = useState(true);
+  const [doiShow] = useState(true);
+  const [statusShow] = useState(true);
 
   const getArticles = async () => {
     await axios
@@ -34,10 +34,6 @@ const ArticleApprove = () => {
   useEffect(() => {
     getArticles();
   }, []);
-
-  const handleStatusChange = (event) => {
-  setStatusShow(event.target.checked);
-  };
 
   return (
     <div>
@@ -60,8 +56,10 @@ const ArticleApprove = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
-          stausShow={!statusShow}
+          statusShow={!statusShow}
         />
+      </div>
+      <div>
       </div>
     </div>
   );

@@ -40,14 +40,9 @@ router.get('/:semethod', async (req, res) => {
 });
 
 // @route GET api/articles/:status
-// @description retrieves articles by moderation status
+// @description update status field
 // @access Public
-router.get('/:status', async (req, res) => {
-  const artModStatus = req.params;
-
-  console.log(artModStatus);
-  const data = await Article.find({ status: artModStatus.status });
-  res.json(data);
+router.post('/:status', (req, res) => {
 });
 
 // @route GET api/articles

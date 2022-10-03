@@ -17,19 +17,13 @@ export const ModeratorTableGrid = (props) => {
   const handleClick = (event, cellValues) => {
     console.log(cellValues.row);
   };
-  const handleCellClick = (param, event) => {
-    event.stopPropagation();
-  };
-  
-  const handleRowClick = (param, event) => {
-    event.stopPropagation();
-  };
+
   // define table columns
   const columns = [
     { field: 'id', headerName: 'ID', hide: true },
-    { field: 'title', headerName: 'Title', width: 200, hide: titleShow },
-    { field: 'authors', headerName: 'Authors', width: 150, hide: authorShow },
-    { field: 'journal', headerName: 'Journal', width: 200, hide: journalShow },
+    { field: 'title', headerName: 'Title', width: 100, hide: titleShow },
+    { field: 'authors', headerName: 'Authors', width: 100, hide: authorShow },
+    { field: 'journal', headerName: 'Journal', width: 100, hide: journalShow },
     { field: 'volume', headerName: 'Volume', width: 100, hide: volumeShow },
     { field: 'version', headerName: 'Version', width: 100, hide: versionShow },
     { field: 'pages', headerName: 'Pages', width: 100, hide: pagesShow },
@@ -71,6 +65,7 @@ export const ModeratorTableGrid = (props) => {
     doi: row.doi,
     status: row.status,
   }));
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -80,8 +75,7 @@ export const ModeratorTableGrid = (props) => {
         disableColumnMenu={true}
         density={'compact'}
         pageSize={5}
-        onCellClick={handleCellClick}
-        onRowClick={handleRowClick}
+        handleClick
         rowsPerPageOptions={[5, 10, 20]}
       />
     </div>

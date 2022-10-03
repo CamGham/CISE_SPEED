@@ -4,6 +4,7 @@ import Submission from "./pages/Submission";
 import Home from "./pages/Home";
 import ArticleDisplay from './pages/ArticleDisplay';
 import ArticleApprove from './pages/ArticleApprove';
+import NewArticleApprove from './pages/NewArticleApprove';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/createArticle" element={<Submission/>}/>
         <Route path="/showArticles" element={<ArticleDisplay/>}/>
         <Route path="/articleApprove" element={<ArticleApprove/>}/>
+        <Route path="/newArticleApprove" element={<NewArticleApprove/>}/>
       </Routes>
     </Router>
   );
