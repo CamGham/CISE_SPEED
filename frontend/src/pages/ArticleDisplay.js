@@ -150,7 +150,6 @@ const ArticleDisplay = () => {
         <input placeholder="from"></input>-<input placeholder="to"></input>
         <button>show</button>
       </div> */}
-      {console.log(articles)}
       {articles.length > 0 ? (
         <div className="tableCont">
           <TableGrid
