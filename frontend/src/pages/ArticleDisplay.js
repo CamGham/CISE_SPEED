@@ -11,6 +11,7 @@ import {
   InputLabel,
 } from '@mui/material';
 import './ArticleDisplay.css';
+import HomeIcon from '@mui/icons-material/ArrowBack';
 
 const ArticleDisplay = () => {
   const [articles, setArticles] = useState([]);
@@ -94,15 +95,18 @@ const ArticleDisplay = () => {
   };
 
   return (
- 
-    <div className='doc'>
-      <div className='navCont'>
+    <div className="doc">
       <h1>Display</h1>
-        <Link to="/">Home</Link>
+      <div className="navCont">
+        <Link to="/">
+          <HomeIcon style={{ 'font-size': '40px' }} />
+        </Link>
       </div>
-      <div className='dropdownCont'>
-        <FormControl sx={{ m: 1, minWidth: 100 }}>
-          <InputLabel id="practice-dropdown">SE-Method</InputLabel>
+      <div className="dropdownCont">
+        <FormControl
+          sx={{ m: 1, minWidth: 120, background: '#ffff', borderRadius: 1 }}
+        >
+          <InputLabel id="semethod-dropdown">SE-Method</InputLabel>
           <Select
             labelId="semethod-dropdown"
             id="semethod-dropdown"
@@ -116,7 +120,9 @@ const ArticleDisplay = () => {
             <MenuItem value={'atdd'}>ATDD</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 85 }}>
+        <FormControl
+          sx={{ m: 1, minWidth: 85, background: '#ffff', borderRadius: 1 }}
+        >
           <InputLabel id="claim-dropdown">Claim</InputLabel>
           <Select
             labelId="claim-dropdown"
@@ -144,7 +150,8 @@ const ArticleDisplay = () => {
         <input placeholder="from"></input>-<input placeholder="to"></input>
         <button>show</button>
       </div> */}
-      <div className='tableCont'>
+
+      <div className="tableCont">
         <TableGrid
           articles={articles}
           titleShow={!titleShow}
@@ -155,11 +162,10 @@ const ArticleDisplay = () => {
           pagesShow={!pagesShow}
           yearShow={!yearShow}
           doiShow={!doiShow}
-          
         />
       </div>
-      <div className='checkboxCont'>
-        <h3>Filters</h3>
+      <div className="checkboxCont">
+        <h2 className="filterHeader">Filters</h2>
         <FormControlLabel
           label="Title"
           control={
@@ -206,7 +212,6 @@ const ArticleDisplay = () => {
         />
       </div>
     </div>
-
   );
 };
 

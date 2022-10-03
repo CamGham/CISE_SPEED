@@ -41,6 +41,14 @@ export const TableGrid = (props) => {
   return (
     <div style={{ height: 400, width: '100%', background: '#fffff' }}>
       <DataGrid
+      sx={{ "& .MuiDataGrid-columnHeaders": {
+        backgroundColor: "#3d71ff",
+        color: "#ffff",
+        fontSize: 16
+      },"& .MuiDataGrid-virtualScrollerRenderZone": {
+        "& .MuiDataGrid-row": {
+          "&:nth-child(2n)": { backgroundColor: "rgba(235, 235, 235, .7)" }
+        }}}}
         rows={rows}
         columns={columns}
         autoHeight={true}

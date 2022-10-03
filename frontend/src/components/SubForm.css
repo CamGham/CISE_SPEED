@@ -100,7 +100,7 @@ input {
   height: 30px;
   border-radius: 10px;
   border-width: 2px;
-  border-color: #3369ff;
+  /* border-color: #3369ff; */
   border-style: solid;
   background-color: white;
   transition: 0.3s all;

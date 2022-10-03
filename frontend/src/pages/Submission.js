@@ -7,11 +7,10 @@ import HomeIcon from '@mui/icons-material/ArrowBack';
 const Submission = () => {
   return (
     <div className="doc">
-        <h1>Article Submission</h1>
+      <h1>Article Submission</h1>
       <div className="navCon">
         <Link to="/" className="nav">
-          {/* <div className="navButton">Home</div> */}
-          <HomeIcon style={{'font-size': '40px'}}/>
+          <HomeIcon style={{ 'font-size': '40px' }} />
         </Link>
       </div>
       <div className="formCon">
