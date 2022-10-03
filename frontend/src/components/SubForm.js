@@ -122,7 +122,7 @@ const SubForm = () => {
           onChange={handleUpload}
           className="fileupload"
         />
-        <label for="file" className="upload">
+        <label htmlFor="file" className="upload">
           Upload Bibtex File
         </label>
       </div>

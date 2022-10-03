@@ -26,39 +26,39 @@ const ArticleDisplay = () => {
   const [seMethod, setSeMethod] = useState('');
   const [claim, setClaim] = useState('');
 
-  const getArticles = async () => {
-    await axios
-      .get('http://localhost:8082/api/articles')
-      .then((res) => {
-        setArticles(res.data);
-      })
-      .catch((err) => {
-        console.log('error');
-      });
-  };
-
   useEffect(() => {
+    const getArticles = async () => {
+      await axios
+        .get('http://localhost:8082/api/articles')
+        .then((res) => {
+          setArticles(res.data);
+        })
+        .catch((err) => {
+          console.log('error');
+        });
+    };
     getArticles();
   }, []);
-  const getArticlesByFilter = async () => {
-    const myUrl = new URL('http://localhost:8082/api/articles/filter');
-    if (seMethod !== '') {
-      myUrl.searchParams.append('semethod', seMethod);
-    }
-    if (claim !== '') {
-      myUrl.searchParams.append('claim', claim);
-    }
-    console.log(myUrl.href);
-    await axios
-      .get(myUrl)
-      .then((res) => {
-        setArticles(res.data);
-      })
-      .catch((err) => {
-        console.log('error');
-      });
-  };
+
   useEffect(() => {
+    const getArticlesByFilter = async () => {
+      const myUrl = new URL('http://localhost:8082/api/articles/filter');
+      if (seMethod !== '') {
+        myUrl.searchParams.append('semethod', seMethod);
+      }
+      if (claim !== '') {
+        myUrl.searchParams.append('claim', claim);
+      }
+      console.log(myUrl.href);
+      await axios
+        .get(myUrl)
+        .then((res) => {
+          setArticles(res.data);
+        })
+        .catch((err) => {
+          console.log('error');
+        });
+    };
     getArticlesByFilter();
   }, [seMethod, claim]);
 
@@ -99,7 +99,7 @@ const ArticleDisplay = () => {
       <h1>Display</h1>
       <div className="navCont">
         <Link to="/">
-          <HomeIcon style={{ 'font-size': '40px' }} />
+          <HomeIcon style={{ fontSize: '40px' }} />
         </Link>
       </div>
       <div className="dropdownCont">
@@ -150,20 +150,29 @@ const ArticleDisplay = () => {
         <input placeholder="from"></input>-<input placeholder="to"></input>
         <button>show</button>
       </div> */}
-
-      <div className="tableCont">
-        <TableGrid
-          articles={articles}
-          titleShow={!titleShow}
-          authorShow={!authorShow}
-          journalShow={!journalShow}
-          volumeShow={!volumeShow}
-          versionShow={!versionShow}
-          pagesShow={!pagesShow}
-          yearShow={!yearShow}
-          doiShow={!doiShow}
-        />
-      </div>
+      {console.log(articles)}
+      {articles.length > 0 ? (
+        <div className="tableCont">
+          <TableGrid
+            articles={articles}
+            titleShow={!titleShow}
+            authorShow={!authorShow}
+            journalShow={!journalShow}
+            volumeShow={!volumeShow}
+            versionShow={!versionShow}
+            pagesShow={!pagesShow}
+            yearShow={!yearShow}
+            doiShow={!doiShow}
+          />
+        </div>
+      ) : (
+        <h3
+          data-testid="loading"
+          style={{ margiTop: '10%', marginBottom: '10%' }}
+        >
+          Loading data...
+        </h3>
+      )}
       <div className="checkboxCont">
         <h2 className="filterHeader">Filters</h2>
         <FormControlLabel
