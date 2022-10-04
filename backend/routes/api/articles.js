@@ -40,10 +40,14 @@ router.get('/:semethod', async (req, res) => {
 });
 
 // @route GET api/articles/:status
-// @description update status field
+// @description update status field in database by passing in the correct article ID
 // @access Public
-router.post('/:status', (req, res) => {
-});
+router.put('/', (req, res) => {
+  const articleId = getID(req.params.id)
+  const updatedStatus = getStatus(req.params.status)
+  Article.status = updatedStatus
+  res.send('Status Updated')
+ })
 
 // @route GET api/articles
 // @description create article

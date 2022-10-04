@@ -2,13 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
-// import {
-//   Checkbox,
-//   FormControlLabel,
-//   Select,
-// } from '@mui/material';
-
-  
 
 const NewArticleApprove = () => {
 
@@ -28,6 +21,10 @@ const NewArticleApprove = () => {
 
         const handleClick = (cellValues) => {
           console.log(cellValues.row);
+          console.log(cellValues.row.id);
+          console.log(cellValues.row.status);
+          handleChange(cellValues)
+          handleStatusChange(cellValues)
         };
     
         // define table columns
@@ -108,6 +105,7 @@ const NewArticleApprove = () => {
   const [doiShow] = useState(true);
   const [statusShow] = useState(true);
 
+   //GET article information from database
   const getArticles = async () => {
     await axios
       .get('http://localhost:8082/api/articles')
@@ -123,19 +121,43 @@ const NewArticleApprove = () => {
     getArticles();
   }, []);
 
-  // Updates the status in database using post
-  //WIP
-  const handleStatusChange = (cellValues, e) => {
+  
 
-    console.log(cellValues.row.status);
-    axios
-    .post('http://localhost:8082/api/articles', cellValues.row.status)
+   // Updates the status in database using POST
+  //WIP 
+  const [data, setData] = useState({
+    id:"",
+    status: "",
+  });
 
-    .catch(err => {
-      console.log("Status could not be updated");
-    })
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setData({
+      ...data,
+      [e.target.name]: value
+    });
   };
 
+  const handleStatusChange = (e, cellValues) => {
+    const rowToUpdate = {
+      id: cellValues.row._id
+    }
+    const updatedStatus = {
+      status: cellValues.row.status,
+    };
+
+    axios
+    //Put
+      .put('http://localhost:8082/api/articles', rowToUpdate, updatedStatus)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log("Status could not be updated");
+      });
+  };
+
+  //Returned page HTML
   return (
     <div>
       <h1> New Article Moderation Display</h1>
