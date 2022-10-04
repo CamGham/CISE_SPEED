@@ -1,3 +1,3 @@
 {
-  "mongoURI": "mongodb+srv://Admin:Cisethree123@speed.vhlffcv.mongodb.net/?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://Admin:Cisethree123@speed.vhlffcv.mongodb.net/articles?retryWrites=true&w=majority"
 }
