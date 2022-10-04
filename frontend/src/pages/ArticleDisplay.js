@@ -49,7 +49,6 @@ const ArticleDisplay = () => {
       if (claim !== '') {
         myUrl.searchParams.append('claim', claim);
       }
-      console.log(myUrl.href);
       await axios
         .get(myUrl)
         .then((res) => {
@@ -177,7 +176,11 @@ const ArticleDisplay = () => {
         <FormControlLabel
           label="Title"
           control={
-            <Checkbox checked={titleShow} onChange={handleTitleChange} />
+            <Checkbox
+              data-testid="titleShow"
+              checked={titleShow}
+              onChange={handleTitleChange}
+            />
           }
         />
         <FormControlLabel

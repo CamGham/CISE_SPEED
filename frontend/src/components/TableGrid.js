@@ -54,8 +54,8 @@ export const TableGrid = (props) => {
         autoHeight={true}
         disableColumnMenu={true}
         density={'compact'}
-        pageSize={5}
-        rowsPerPageOptions={[5, 10, 20]}
+        pageSize={8}
+        // rowsPerPageOptions={[5, 10, 20]}
         
       />
     </div>
