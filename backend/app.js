@@ -22,9 +22,9 @@ app.use('/api/articles', articles);
 connectDB();
 if (process.env.NODE_ENV === 'production') {
   // serve front-end client from build folder
-  app.use(express.static(`${__dirname}./../front-end/build`));
+  app.use(express.static(`${__dirname}./../frontend/build`));
   app.get('*', (req, res) => {
-    res.sendFile(`${__dirname}./../front-end/build/index.html`);
+    res.sendFile(`${__dirname}./../frontend/build/index.html`);
   });
 } else {
   app.get('/', (req, res) => res.send(`API running on port ${port}`));
