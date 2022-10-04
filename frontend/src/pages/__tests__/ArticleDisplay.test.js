@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  render,
-  waitForElement,
-  cleanup,
-  screen,
-} from '@testing-library/react';
+import { render, cleanup, screen } from '@testing-library/react';
 import ArticleDisplay from '../ArticleDisplay';
-import userEvent from '@testing-library/user-event';
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 afterEach(cleanup);
 
@@ -40,7 +33,5 @@ it('Claim dropdown functional', () => {
       <ArticleDisplay />
     </Router>
   );
-  expect(
-    screen.getByText(/se\-method/i)
-  ).toBeInTheDocument();
+  expect(screen.getByText(/se-method/i)).toBeInTheDocument();
 });
