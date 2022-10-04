@@ -55,7 +55,6 @@ const ArticleDisplay = () => {
           setArticles(res.data);
         })
         .catch((err) => {
-          console.log('error');
         });
     };
     getArticlesByFilter();
