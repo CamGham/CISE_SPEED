@@ -41,22 +41,27 @@ export const TableGrid = (props) => {
   return (
     <div style={{ height: 400, width: '100%', background: '#fffff' }}>
       <DataGrid
-      sx={{ "& .MuiDataGrid-columnHeaders": {
-        backgroundColor: "#3d71ff",
-        color: "#ffff",
-        fontSize: 16
-      },"& .MuiDataGrid-virtualScrollerRenderZone": {
-        "& .MuiDataGrid-row": {
-          "&:nth-of-type(2n)": { backgroundColor: "rgba(235, 235, 235, .7)" }
-        }}}}
+        sx={{
+          '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: '#3d71ff',
+            color: '#ffff',
+            fontSize: 16,
+          },
+          '& .MuiDataGrid-virtualScrollerRenderZone': {
+            '& .MuiDataGrid-row': {
+              '&:nth-of-type(2n)': {
+                backgroundColor: 'rgba(235, 235, 235, .7)',
+              },
+            },
+          },
+        }}
         rows={rows}
         columns={columns}
         autoHeight={true}
         disableColumnMenu={true}
         density={'compact'}
         pageSize={8}
-        // rowsPerPageOptions={[5, 10, 20]}
-        
+        rowsPerPageOptions={[8]}
       />
     </div>
   );
