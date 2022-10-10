@@ -1,9 +1,41 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, cloneElement } from 'react';
 import { Link } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 
 const NewArticleApprove = () => {
+
+
+  const [dataForStatus, setDataForStatus] =useState('');
+
+  const handleData = (cellValues)=>{
+    const currentData = {
+      id: cellValues.id,
+      title: cellValues.title,
+      authors: cellValues.authors,
+      journal: cellValues.journal,
+      volume: cellValues.volume,
+      version: cellValues.version,
+      pages: cellValues.pages, 
+      year: cellValues.year,
+      doi: cellValues.doi,
+      status: cellValues.status,
+    };
+  setDataForStatus(currentData);
+  console.log('here'+ dataForStatus);
+  };
+
+const handleSubmit=(dataForStatus)=>{
+  console.log(dataForStatus);
+  axios
+      .put('http://localhost:8082/api/articles'+dataForStatus.id, dataForStatus)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log("Status could not be updated");
+      });
+};
 
     const NewModeratorTableGrid = (props) => {
         const {
@@ -23,8 +55,8 @@ const NewArticleApprove = () => {
           console.log(cellValues.row);
           console.log(cellValues.row.id);
           console.log(cellValues.row.status);
-          handleChange(cellValues)
-          handleStatusChange(cellValues)
+          // handleChange(cellValues)
+          // handleStatusChange(cellValues)
         };
     
         // define table columns
@@ -45,8 +77,12 @@ const NewArticleApprove = () => {
               return (
                 <button id="approveBtn" onClick={() => {
                   cellValues.row.status = 'Approved'
+                  handleData(cellValues);
+                  handleSubmit(dataForStatus);
+
+                  cellValues.row.status = 'Approved'
                   handleClick(cellValues);
-                  handleStatusChange(cellValues);
+                  // handleStatusChange(cellValues);
                 }}>Approve</button>
               );
             }
@@ -58,12 +94,42 @@ const NewArticleApprove = () => {
               <button id="rejectBtn" onClick={() => {
                   cellValues.row.status = 'Rejected'
                   handleClick(cellValues);
-                  handleStatusChange(cellValues);
+                  // handleStatusChange(cellValues);
                 }}>Reject</button>
             );
           }
         }
         ];
+
+      //   const [currentArticle, setCUrrentArticle] = useState('');
+      //   //Table of set data passed in
+      //   setCUrrentArticle(newValues)
+
+      //   onSubmit = e => {
+      //     e.preventDefault();
+      //   //States for sending via axios
+      //   const data = {
+      //     id: this.state.id,
+      //     title: this.state.title,
+      //     authors: this.state.authors,
+      //     journal: this.state.journal,
+      //     volume: this.state.volume,
+      //     version: this.state.version,
+      //     pages: this.state.pages,
+      //     year: this.state.year,
+      //     doi: this.state.doi,
+      //     status: this.state.status,
+      //   };
+
+      //   axios
+      //     .put('http://localhost:8082/api/articles' +this.props.match.params.id, data)
+      //     .then((res) => {
+      //       this.props.history.push('/id'+this.props)
+      //     })
+      //     .catch(err => {
+      //       console.log("Status could not be updated");
+      //     });
+      // }
     
         // set article data under their respective table column name
         const rows = articles.map((row) => ({
@@ -105,6 +171,7 @@ const NewArticleApprove = () => {
   const [doiShow] = useState(true);
   const [statusShow] = useState(true);
 
+
    //GET article information from database
   const getArticles = async () => {
     await axios
@@ -123,39 +190,40 @@ const NewArticleApprove = () => {
 
   
 
-   // Updates the status in database using POST
-  //WIP 
-  const [data, setData] = useState({
-    id:"",
-    status: "",
-  });
+  //  // Updates the status in database using POST
+  // //WIP 
+  // const [data, setData] = useState({
+  //   id:"",
+  //   status: "",
+  // });
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setData({
-      ...data,
-      [e.target.name]: value
-    });
-  };
+  // const handleChange = (e) => {
+  //   const value = e.target.value;
+  //   setData({
+  //     ...data,
+  //     [e.target.name]: value
+  //   });
+  // };
 
-  const handleStatusChange = (e, cellValues) => {
-    const rowToUpdate = {
-      id: cellValues.row._id
-    }
-    const updatedStatus = {
-      status: cellValues.row.status,
-    };
+  // const handleStatusChange = (e, cellValues) => {
+  //   const rowToUpdate = {
+  //     id: cellValues.row._id
+  //   }
+  //   const updatedStatus = {
+  //     status: cellValues.row.status,
+  //   };
 
-    axios
-    //Put
-      .put('http://localhost:8082/api/articles', rowToUpdate, updatedStatus)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log("Status could not be updated");
-      });
-  };
+  //   axios
+  //   //Put
+  //     // the data in put should be 'newArticles' data 
+  //     .put('http://localhost:8082/api/articles', rowToUpdate, updatedStatus)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch(err => {
+  //       console.log("Status could not be updated");
+  //     });
+  // };
 
   //Returned page HTML
   return (
