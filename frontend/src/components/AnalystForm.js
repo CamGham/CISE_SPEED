@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import './SubForm.css';
+import './AnalystForm.css';
 
 const AnalystForm = (props) => {
   const data = props.data;
@@ -17,16 +17,16 @@ const AnalystForm = (props) => {
       version: data.version,
       pages: data.pages,
       doi: data.doi,
-      status: data.status,
+      status: 'completed',
       semethod: data.semethod,
       claim: data.claim,
-      result: data.result,
+      result: '',
       research: '',
       participant: '',
     };
     formik.setValues(newValues);
-    document.getElementById("semethod").value = data.semethod;
-    document.getElementById("claim").value = data.claim;
+    document.getElementById('semethod').value = data.semethod;
+    document.getElementById('claim').value = data.claim;
   }, [data]);
 
   //formik form
@@ -41,10 +41,10 @@ const AnalystForm = (props) => {
       version: '',
       pages: '',
       doi: '',
-      status: 'pending',
+      status: 'completed',
       semethod: '',
       claim: '',
-      result: true,
+      result: '',
       research: '',
       participant: '',
     },
@@ -60,18 +60,21 @@ const AnalystForm = (props) => {
       doi: Yup.string().required('Required'),
       semethod: Yup.string().required('Required'),
       claim: Yup.string().required('Required'),
+      result: Yup.string().required('Required'),
+      research: Yup.string().required('Required'),
+      participant: Yup.string().required('Required'),
     }),
     //on submission of form
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      //   axios
-      //     .post('http://localhost:8082/api/articles', values)
-      //     .then((res) => {
-      //       formik.resetForm();
-      //     })
-      //     .catch((err) => {
-      //       console.log('error when submitting: ' + err);
-      //     });
+        axios
+          .post('http://localhost:8082/api/articles', values)
+          .then((res) => {
+            formik.resetForm();
+            alert("Article completed");
+          })
+          .catch((err) => {
+            console.log('error when submitting: ' + err);
+          });
     },
   });
 
@@ -204,7 +207,7 @@ const AnalystForm = (props) => {
           <select
             type="text"
             name="semethod"
-            id='semethod'
+            id="semethod"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.semethod}
@@ -243,6 +246,66 @@ const AnalystForm = (props) => {
         <div className="errCon">
           {formik.touched.claim && formik.errors.claim ? (
             <div className="error">{formik.errors.claim}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="result"
+            id="result"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.result}
+          >
+            <option value="">Select Result</option>
+            <option value="Agree">Agree</option>
+            <option value="Disagree">Disagree</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.result && formik.errors.result ? (
+            <div className="error">{formik.errors.result}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="research"
+            id="research"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.research}
+          >
+            <option value="">Select Research Type</option>
+            <option value="Case Study">Case Study</option>
+            <option value="Experiment">Experiment</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.research && formik.errors.research ? (
+            <div className="error">{formik.errors.research}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="participant"
+            id="participant"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.participant}
+          >
+            <option value="">Select Participant Type</option>
+            <option value="Student">Student</option>
+            <option value="Practitioner">Practitioner</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.participant && formik.errors.participant ? (
+            <div className="error">{formik.errors.participant}</div>
           ) : null}
         </div>
 

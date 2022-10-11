@@ -31,7 +31,6 @@ const AnalystArticle = () => {
   return (
     <div className="doc">
       <h1>Article Analysis</h1>
-      <h2>showing {id}</h2>
       <div className="navCon">
         <Link to="/accepted" className="nav">
           <HomeIcon data-testid="home" style={{ fontSize: '40px' }} />
