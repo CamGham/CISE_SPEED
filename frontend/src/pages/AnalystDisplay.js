@@ -4,13 +4,21 @@ import { Link } from 'react-router-dom';
 import { TableGrid } from '../components/TableGrid';
 import './AnalystDisplay.css';
 import HomeIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
 const AnalystDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
+  let navigate = useNavigate();
   const buttonTest = (e) => {
     e.preventDefault();
     console.log(selectedRow);
+    if(selectedRow.length === 1)
+    {
+      // console.log(selectedRow[0].id);
+
+      navigate(`/analyse/${selectedRow[0].id}`);
+    }
   };
 
   useEffect(() => {
