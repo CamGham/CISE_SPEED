@@ -11,6 +11,8 @@ export const TableGrid = (props) => {
     pagesShow,
     yearShow,
     doiShow,
+    claimShow,
+    semethodShow
   } = props;
 
   // define table columns
@@ -24,6 +26,8 @@ export const TableGrid = (props) => {
     { field: 'pages', headerName: 'Pages', width: 100, hide: pagesShow },
     { field: 'year', headerName: 'Year', width: 100, hide: yearShow },
     { field: 'doi', headerName: 'DOI', width: 100, hide: doiShow },
+    { field: 'claim', headerName: 'Claim', width: 200, hide: claimShow },
+    { field: 'semethod', headerName: 'SE method', width: 100, hide: semethodShow },
   ];
 
   // set article data under their respective table column name
@@ -37,6 +41,8 @@ export const TableGrid = (props) => {
     pages: row.pages,
     year: row.year,
     doi: row.doi,
+    claim: row.claim,
+    semethod: row.semethod,
   }));
   return (
     <div style={{ height: 400, width: '100%', background: '#fffff' }}>
