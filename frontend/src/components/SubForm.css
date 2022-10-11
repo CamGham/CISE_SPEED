@@ -23,7 +23,7 @@
   border-style: solid;
   background-color: rgba(255, 255, 255, 1);
   transition: 0.3s all;
-  margin: 5px;
+  margin: 2px;
 }
 .field:hover {
   background-color: rgba(255, 255, 255, 0.8);

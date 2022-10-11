@@ -1,9 +1,7 @@
 .doc {
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
 
 .navCon {
@@ -14,13 +12,11 @@
   position: absolute;
   left: 10px;
   top: 10px;
-
 }
 
 .formCon {
   margin-top: 5%;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }
 
