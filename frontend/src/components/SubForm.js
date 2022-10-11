@@ -21,7 +21,7 @@ const SubForm = () => {
       status: 'pending',
       semethod: '',
       claim: '',
-      result: true,
+      result: '',
       research: '',
       participant: '',
     },
@@ -78,7 +78,7 @@ const SubForm = () => {
           status: 'pending',
           semethod: '',
           claim: '',
-          result: true,
+          result: '',
           research: '',
           participant: '',
         };
@@ -95,7 +95,7 @@ const SubForm = () => {
           status: 'pending',
           semethod: '',
           claim: '',
-          result: true,
+          result: '',
           research: '',
           participant: '',
         };
