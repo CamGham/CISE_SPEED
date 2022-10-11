@@ -29,7 +29,7 @@ const AnalystDisplay = () => {
       <h1>Analyst</h1>
       <div className="navCont">
         <Link to="/">
-          <HomeIcon style={{ fontSize: '40px' }} />
+          <HomeIcon data-testid='home' style={{ fontSize: '40px' }} />
         </Link>
       </div>
       
