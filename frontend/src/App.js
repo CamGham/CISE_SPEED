@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import ArticleDisplay from './pages/ArticleDisplay';
 import AnalystDisplay from './pages/AnalystDisplay';
 import AnalystArticle from './pages/AnalystArticle';
+import ModeratorDisplay from './pages/ModeratorDisplay';
+import ModeratorArticle from './pages/ModeratorArticle';
 
 function App() {
   return (
@@ -15,6 +17,9 @@ function App() {
         <Route path="/showArticles" element={<ArticleDisplay/>}/>
         <Route path="/accepted" element={<AnalystDisplay/>}/>
         <Route path="/analyse/:id" element={<AnalystArticle/>}/>
+        <Route path="/moderate" element={<ModeratorDisplay/>}/>
+        <Route path="/showArticles" element={<ModeratorArticle/>}/>
+        
       </Routes>
     </Router>
   );
