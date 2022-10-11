@@ -2,14 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TableGrid } from '../components/TableGrid';
-import {
-  Checkbox,
-  FormControlLabel,
-  Select,
-  FormControl,
-  MenuItem,
-  InputLabel,
-} from '@mui/material';
 import './ArticleDisplay.css';
 import HomeIcon from '@mui/icons-material/ArrowBack';
 
