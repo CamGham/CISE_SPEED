@@ -12,7 +12,8 @@ export const TableGrid = (props) => {
     yearShow,
     doiShow,
     claimShow,
-    semethodShow
+    semethodShow,
+    setSelectedRow
   } = props;
 
   // define table columns
@@ -61,6 +62,17 @@ export const TableGrid = (props) => {
         disableColumnMenu={true}
         density={'compact'}
         pageSize={8}
+        onSelectionModelChange={(ids) => {
+          const selectedIDs = new Set(ids);
+          const selectedRows = rows.filter((row) =>
+            selectedIDs.has(row.id),
+          );
+
+          setSelectedRow(selectedRows);
+        }}
+
+
+       
         // rowsPerPageOptions={[5, 10, 20]}
         
       />
