@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import SubForm from '../components/SubForm';
+import AnalystForm from '../components/AnalystForm';
 import './Submission.css';
 import HomeIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
@@ -16,7 +16,6 @@ const AnalystArticle = () => {
       .then((res) => {
         setData(res.data);
         console.log(res.data);
-        console.log(data);
       })
       .catch((err) => {
         console.log('error');
@@ -27,7 +26,6 @@ const AnalystArticle = () => {
     (async () => {
       await getData();
     })();
-    console.log(data);
   }, []);
 
   return (
@@ -40,7 +38,11 @@ const AnalystArticle = () => {
         </Link>
       </div>
       <div className="formCon">
-        <SubForm />
+        {data ? <AnalystForm data={data} /> : 
+        <h2>Loading</h2>
+        }
+        
+
       </div>
     </div>
   );
