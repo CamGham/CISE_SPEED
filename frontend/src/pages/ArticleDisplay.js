@@ -23,6 +23,9 @@ const ArticleDisplay = () => {
   const [pagesShow, setPagesShow] = useState(false);
   const [yearShow, setYearShow] = useState(false);
   const [doiShow, setDoiShow] = useState(true);
+  const [claimShow, setClaimShow] = useState(true);
+  const [semethodShow, setSemethodShow] = useState(true);
+
   const [seMethod, setSeMethod] = useState('');
   const [claim, setClaim] = useState('');
 
@@ -84,6 +87,16 @@ const ArticleDisplay = () => {
   const handleDoiChange = (event) => {
     console.log(event);
     setDoiShow(event.target.checked);
+  };
+
+  const handleClaimShow = (event) => {
+    console.log(event);
+    setClaimShow(event.target.checked);
+  };
+
+  const handleSemethodShow= (event) => {
+    console.log(event);
+    setSemethodShow(event.target.checked);
   };
   const handleMethodChange = (event) => {
     setSeMethod(event.target.value);
@@ -160,6 +173,8 @@ const ArticleDisplay = () => {
             pagesShow={!pagesShow}
             yearShow={!yearShow}
             doiShow={!doiShow}
+            claimShow={!claimShow}
+            semethodShow={!semethodShow}
           />
         </div>
       ) : (
@@ -219,6 +234,14 @@ const ArticleDisplay = () => {
         <FormControlLabel
           label="Year"
           control={<Checkbox checked={yearShow} onChange={handleYearChange} />}
+        />
+             <FormControlLabel
+          label="Claim"
+          control={<Checkbox checked={claimShow} onChange={handleClaimShow} />}
+        />
+             <FormControlLabel
+          label="SE Method"
+          control={<Checkbox checked={semethodShow} onChange={handleSemethodShow} />}
         />
       </div>
     </div>
