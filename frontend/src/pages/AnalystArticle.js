@@ -5,42 +5,45 @@ import './Submission.css';
 import HomeIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
 
-
 const AnalystArticle = () => {
-    const {id} = useParams();
+  const { id } = useParams();
 
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const getData = async () => {
-          await axios
-          .get('http://localhost:8082/api/articles/'+id)
-            .then((res) => {
-              setData(res.data);
-            })
-            .catch((err) => {
-              console.log('error');
-            });
-        };
-        getData();
+  const getData = async () => {
+    await axios
+      .get('http://localhost:8082/api/articles/' + id)
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
         console.log(data);
-      }, []);
+      })
+      .catch((err) => {
+        console.log('error');
+      });
+  };
 
-    return (
-        <div className="doc">
-          <h1>Article Analysis</h1>
-          <h2>showing {id}</h2>
-          <div className="navCon">
-            <Link to="/accepted" className="nav">
-              <HomeIcon data-testid='home' style={{ 'fontSize': '40px' }} />
-            </Link>
-          </div>
-          <div className="formCon">
-            <SubForm />
-          </div>
-        </div>
-      );
-  
-}
+  useEffect(() => {
+    (async () => {
+      await getData();
+    })();
+    console.log(data);
+  }, []);
 
-export default AnalystArticle
+  return (
+    <div className="doc">
+      <h1>Article Analysis</h1>
+      <h2>showing {id}</h2>
+      <div className="navCon">
+        <Link to="/accepted" className="nav">
+          <HomeIcon data-testid="home" style={{ fontSize: '40px' }} />
+        </Link>
+      </div>
+      <div className="formCon">
+        <SubForm />
+      </div>
+    </div>
+  );
+};
+
+export default AnalystArticle;
