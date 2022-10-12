@@ -29,6 +29,7 @@ const AnalystForm = (props) => {
     document.getElementById('semethod').value = data.semethod;
     document.getElementById('claim').value = data.claim;
     setID(data._id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   //formik form
