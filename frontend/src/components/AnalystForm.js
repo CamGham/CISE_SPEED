@@ -256,6 +256,7 @@ const AnalystForm = (props) => {
             type="text"
             name="result"
             id="result"
+            data-testid="result"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.result}
@@ -276,6 +277,7 @@ const AnalystForm = (props) => {
             type="text"
             name="research"
             id="research"
+            data-testid="research"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.research}
