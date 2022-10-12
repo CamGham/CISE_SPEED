@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -6,6 +6,7 @@ import './AnalystForm.css';
 
 const AnalystForm = (props) => {
   const data = props.data;
+  const [ID, setID] = useState('');
 
   useEffect(() => {
     const newValues = {
@@ -27,6 +28,7 @@ const AnalystForm = (props) => {
     formik.setValues(newValues);
     document.getElementById('semethod').value = data.semethod;
     document.getElementById('claim').value = data.claim;
+    setID(data._id);
   }, [data]);
 
   //formik form
@@ -66,15 +68,15 @@ const AnalystForm = (props) => {
     }),
     //on submission of form
     onSubmit: (values) => {
-        axios
-          .post('http://localhost:8082/api/articles', values)
-          .then((res) => {
-            formik.resetForm();
-            alert("Article completed");
-          })
-          .catch((err) => {
-            console.log('error when submitting: ' + err);
-          });
+      axios
+        .put('http://localhost:8082/api/articles/' + ID, values)
+        .then((res) => {
+          formik.resetForm();
+          alert('Article completed');
+        })
+        .catch((err) => {
+          console.log('Error when updating the article!');
+        });
     },
   });
 
