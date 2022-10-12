@@ -46,8 +46,8 @@ const ArticleSchema = new mongoose.Schema({
     required: true,
   },
   result: {
-    type: Boolean,
-    required: true,
+    type: String,
+    required: false,
   },
   research: {
     type: String,

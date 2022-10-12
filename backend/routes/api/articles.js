@@ -4,10 +4,6 @@ const router = express.Router();
 
 // load model
 const Article = require('../../models/Article');
-// @route GET api/articles/test
-// @description tests articles route
-// @access Public
-router.get('/test', (req, res) => res.send('article route testing!'));
 
 // @route Get api/articles
 // @description Get all articles
@@ -48,6 +44,28 @@ router.get('/accepted', async (req, res) => {
     .then((articles) => res.json(articles))
     .catch((err) =>
       res.status(404).json({ noarticlesfound: 'No articles found' })
+    );
+});
+
+// @route GET api/articles/:id
+// @description retrieve the article by its id
+// @access Public
+router.get('/:id', async (req, res) => {
+  Article.findById(req.params.id)
+    .then((articles) => res.json(articles))
+    .catch((err) =>
+      res.status(404).json({ noarticlesfound: 'No articles found' })
+    );
+});
+
+// @route GET api/articles/:id
+// @description update the article by its id
+// @access Public
+router.put('/:id', async (req, res) => {
+  Article.findByIdAndUpdate(req.params.id, req.body)
+    .then((article) => res.json({ msg: 'Updated successfully' }))
+    .catch((err) =>
+      res.status(400).json({ error: 'Unable to update the Database' })
     );
 });
 

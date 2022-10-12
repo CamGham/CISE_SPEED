@@ -17,7 +17,7 @@ const Home = () => {
         </Link>
         </div>
         <div className='button'>
-        <Link to="/completed">
+        <Link to="/accepted">
             Analyse Articles
         </Link>
         </div>

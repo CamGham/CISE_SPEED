@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import bibtexParse from '@orcid/bibtex-parse-js';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import './SubForm.css';
+import './AnalystForm.css';
 
-const SubForm = () => {
+const AnalystForm = (props) => {
+  const data = props.data;
+  const [ID, setID] = useState('');
+
+  useEffect(() => {
+    const newValues = {
+      title: data.title,
+      authors: data.authors,
+      journal: data.journal,
+      year: data.year,
+      volume: data.volume,
+      version: data.version,
+      pages: data.pages,
+      doi: data.doi,
+      status: 'completed',
+      semethod: data.semethod,
+      claim: data.claim,
+      result: '',
+      research: '',
+      participant: '',
+    };
+    formik.setValues(newValues);
+    document.getElementById('semethod').value = data.semethod;
+    document.getElementById('claim').value = data.claim;
+    setID(data._id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   //formik form
   const formik = useFormik({
     //initial values
@@ -18,7 +44,7 @@ const SubForm = () => {
       version: '',
       pages: '',
       doi: '',
-      status: 'pending',
+      status: 'completed',
       semethod: '',
       claim: '',
       result: '',
@@ -37,97 +63,26 @@ const SubForm = () => {
       doi: Yup.string().required('Required'),
       semethod: Yup.string().required('Required'),
       claim: Yup.string().required('Required'),
+      result: Yup.string().required('Required'),
+      research: Yup.string().required('Required'),
+      participant: Yup.string().required('Required'),
     }),
     //on submission of form
     onSubmit: (values) => {
       axios
-        .post('http://localhost:8082/api/articles', values)
+        .put('http://localhost:8082/api/articles/' + ID, values)
         .then((res) => {
           formik.resetForm();
+          alert('Article completed');
         })
         .catch((err) => {
-          console.log('error when submitting: ' + err);
+          console.log('Error when updating the article!');
         });
     },
   });
 
-  //upload bibtex file
-  const handleUpload = async (e) => {
-    const fileReader = new FileReader();
-    fileReader.onload = async (e) => {
-      //extract text
-      const text = e.target.result;
-      //conver to JSON
-      var data = bibtexParse.toJSON(text);
-
-      //ref to fields
-      const article = data[0].entryTags;
-
-      //set values
-      var newValues;
-      if (article.title === undefined)
-        newValues = {
-          title: article.TITLE,
-          authors: article.AUTHOR,
-          journal: article.JOURNAL,
-          year: article.YEAR,
-          volume: article.VOLUME,
-          version: article.NUMBER,
-          pages: article.PAGES,
-          doi: article.DOI,
-          status: 'pending',
-          semethod: '',
-          claim: '',
-          result: '',
-          research: '',
-          participant: '',
-        };
-      else
-        newValues = {
-          title: article.title,
-          authors: article.author,
-          journal: article.journal,
-          year: article.year,
-          volume: article.volume,
-          version: article.number,
-          pages: article.pages,
-          doi: article.doi,
-          status: 'pending',
-          semethod: '',
-          claim: '',
-          result: '',
-          research: '',
-          participant: '',
-        };
-
-      //set undefined values to empty strings
-      for (const key in newValues) {
-        if (newValues[key] === undefined) {
-          newValues[key] = '';
-        }
-      }
-
-      formik.setValues(newValues);
-      formik.handleChange();
-    };
-    //read file
-    fileReader.readAsText(e.target.files[0]);
-  };
   return (
     <form onSubmit={formik.handleSubmit} className="form">
-      <div className="bibtexCont">
-        <input
-          type="file"
-          name="file"
-          id="file"
-          onChange={handleUpload}
-          className="fileupload"
-        />
-        <label htmlFor="file" className="upload">
-          Upload Bibtex File
-        </label>
-      </div>
-      <p>or</p>
       <div className="inputCont">
         <div className="field">
           <input
@@ -255,6 +210,7 @@ const SubForm = () => {
           <select
             type="text"
             name="semethod"
+            id="semethod"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.semethod}
@@ -275,19 +231,86 @@ const SubForm = () => {
           <select
             type="text"
             name="claim"
+            id="claim"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.claim}
           >
             <option value="">Select Claim</option>
-            <option value="Improves product quality">Improves product quality</option>
+            <option value="Improves product quality">
+              Improves product quality
+            </option>
             <option value="Improves code quality">Improves code quality</option>
-            <option value="Improves team confidence">Improves team confidence</option>
+            <option value="Improves team confidence">
+              Improves team confidence
+            </option>
           </select>
         </div>
         <div className="errCon">
           {formik.touched.claim && formik.errors.claim ? (
             <div className="error">{formik.errors.claim}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="result"
+            id="result"
+            data-testid="result"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.result}
+          >
+            <option value="">Select Result</option>
+            <option value="Agree">Agree</option>
+            <option value="Disagree">Disagree</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.result && formik.errors.result ? (
+            <div className="error">{formik.errors.result}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="research"
+            id="research"
+            data-testid="research"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.research}
+          >
+            <option value="">Select Research Type</option>
+            <option value="Case Study">Case Study</option>
+            <option value="Experiment">Experiment</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.research && formik.errors.research ? (
+            <div className="error">{formik.errors.research}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="participant"
+            id="participant"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.participant}
+          >
+            <option value="">Select Participant Type</option>
+            <option value="Student">Student</option>
+            <option value="Practitioner">Practitioner</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.participant && formik.errors.participant ? (
+            <div className="error">{formik.errors.participant}</div>
           ) : null}
         </div>
 
@@ -299,4 +322,4 @@ const SubForm = () => {
   );
 };
 
-export default SubForm;
+export default AnalystForm;
