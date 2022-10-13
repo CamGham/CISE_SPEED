@@ -36,6 +36,16 @@ router.post('/', (req, res) => {
     .catch((err) => res.status(400).json({ error: 'Unable to add article' }));
 });
 
+
+// @update article, by passed ID
+router.put('/:id', async (req, res) => {
+  Article.findByIdAndUpdate(req.params.id, req.body)
+    .then((article) => res.json({ msg: 'status updated succesfully' }))
+    .catch((err) =>
+      res.status(400).json({ error: 'Unable to update status' })
+    );
+});
+
 // @route GET api/articles/accepted
 // @description retrieves articles where status field is accepted
 // @access Public
