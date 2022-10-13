@@ -9,9 +9,20 @@ const ModeratorDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
 
+    function displayApprovedMessage()
+    {
+        document.getElementById("statusText").innerHTML = 'Approved';
+    }
+
+    function displayRejectedMessage()
+    {
+        document.getElementById("statusText").innerHTML = 'Rejected';
+    }
+
     //Approve Button Functionality - Updates status in database with "Approved"
     const buttonApprove = (e) => {
         e.preventDefault();
+        displayApprovedMessage();
 
         const articleDataApprove = {
             id: selectedRow.id,
@@ -27,7 +38,7 @@ const ModeratorDisplay = () => {
             semethod: selectedRow.semethod,
             claim: selectedRow.claim,
             }
-            
+
             console.log(selectedRow[0].id);
             console.log(selectedRow[0].status); 
             
@@ -44,6 +55,7 @@ const ModeratorDisplay = () => {
     //Reject Button Functionality- Updates status in database with "Rejected"
     const buttonReject = (e) => {
         e.preventDefault();
+        displayRejectedMessage();
 
         const articleDataReject = {
             id: selectedRow.id,
@@ -117,6 +129,8 @@ const ModeratorDisplay = () => {
                 <button className="rejectButton" onClick={buttonReject}>
                     Reject
                 </button>
+                <p>Selected Article Status:</p>
+                <span id="statusText">Pending</span>
           </div>
         </div>
       </div>
