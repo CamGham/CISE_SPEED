@@ -59,11 +59,13 @@
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
   }
-  .analyseButton {
-    cursor: pointer;
-    width: 100%;
-    color: #3d71ff;
-    background-color: transparent;
-    border: none;
+  
+  .approveButton{
+    margin: 10px;
+    background-color: rgb(168, 254, 168);
+  }
+  .rejectButton{
+    margin: 10px;
+    background-color: rgb(246, 145, 145);
   }
   

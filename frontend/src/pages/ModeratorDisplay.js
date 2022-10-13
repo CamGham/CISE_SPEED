@@ -9,86 +9,82 @@ const ModeratorDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
 
-  //Approve Button - Updates status in database with "Approved"
-const buttonApprove = (e) => {
-    e.preventDefault();
+    //Approve Button Functionality - Updates status in database with "Approved"
+    const buttonApprove = (e) => {
+        e.preventDefault();
 
-    var articleDataApprove = {
-        id: selectedRow.id,
-        title: selectedRow.title,
-        authors: selectedRow.authors,
-        journal: selectedRow.journal,
-        year: selectedRow.year,
-        volume: selectedRow.volume,
-        version: selectedRow.version,
-        pages: selectedRow.pages,
-        doi: selectedRow.doi,
-        status: selectedRow[0].status = 'Approved',
-        semethod: selectedRow.semethod,
-        claim: selectedRow.claim,
-        };
-
-    if(selectedRow.length === 1) 
-    {
-        console.log(selectedRow[0].id);
-        console.log(selectedRow[0].authors)
-        console.log(selectedRow[0].status); 
-        axios
-        .post('http://localhost:8082/api/articles/'+selectedRow[0].id, articleDataApprove)
-        .then(res => {
-        })
-        .catch(err => {
-        console.log("Cannot update status");
-        })
-    }
-  };
-
-   //Reject Button - Updates status in database with "Rejected"
-//   const buttonReject = (e) => {
-//     e.preventDefault();
-
-//     var dataOfRowR = {
-//         id: selectedRow.id,
-//         title: selectedRow.title,
-//         authors: selectedRow.authors,
-//         journal: selectedRow.journal,
-//         year: selectedRow.year,
-//         volume: selectedRow.volume,
-//         version: selectedRow.version,
-//         pages: selectedRow.pages,
-//         doi: selectedRow.doi,
-//         status: selectedRow[0].status = 'Rejected', 
-//         semethod: selectedRow.semethod,
-//         claim: selectedRow.claim,
-//         };
-
-//     if(selectedRow.length === 1) 
-//     {
-//        console.log(selectedRow[0].id);
-//        console.log(selectedRow[0].authors)
-//        console.log(selectedRow[0].status); 
-//       axios
-//       .get('http://localhost:8082/api/articles/'+selectedRow[0].id, dataOfRowR)
-//       .then(res => {
-//       })
-//       .catch(err => {
-//         console.log("Cannot update status");
-//       })
-//     }
-//   };
-
-  useEffect(() => {
-    const getArticles = async () => {
-      await axios
-        .get('http://localhost:8082/api/articles/accepted')
-        .then((res) => {
-          setArticles(res.data);
-        })
-        .catch((err) => {
-          console.log('error');
-        });
+        const articleDataApprove = {
+            id: selectedRow.id,
+            title: selectedRow.title,
+            authors: selectedRow.authors,
+            journal: selectedRow.journal,
+            year: selectedRow.year,
+            volume: selectedRow.volume,
+            version: selectedRow.version,
+            pages: selectedRow.pages,
+            doi: selectedRow.doi,
+            status: selectedRow[0].status = 'Approved',
+            semethod: selectedRow.semethod,
+            claim: selectedRow.claim,
+            }
+            
+            console.log(selectedRow[0].id);
+            console.log(selectedRow[0].status); 
+            
+            axios
+            .put('http://localhost:8082/api/articles/'+selectedRow[0].id, articleDataApprove)
+            .then(res => {
+                console.log(articleDataApprove);
+            })
+            .catch(err => {
+            console.log("Cannot update status");
+            })
     };
-    getArticles();
+
+    //Reject Button Functionality- Updates status in database with "Rejected"
+    const buttonReject = (e) => {
+        e.preventDefault();
+
+        const articleDataReject = {
+            id: selectedRow.id,
+            title: selectedRow.title,
+            authors: selectedRow.authors,
+            journal: selectedRow.journal,
+            year: selectedRow.year,
+            volume: selectedRow.volume,
+            version: selectedRow.version,
+            pages: selectedRow.pages,
+            doi: selectedRow.doi,
+            status: selectedRow[0].status = 'Rejected',
+            semethod: selectedRow.semethod,
+            claim: selectedRow.claim,
+            }
+
+            console.log(selectedRow[0].id);
+            console.log(selectedRow[0].status); 
+            
+            axios
+            .put('http://localhost:8082/api/articles/'+selectedRow[0].id, articleDataReject)
+            .then(res => {
+                console.log(articleDataReject);
+            })
+            .catch(err => {
+            console.log("Cannot update status");
+            })
+    };
+
+    useEffect(() => {
+        const getArticles = async () => {
+        await axios
+            .get('http://localhost:8082/api/articles')
+            .then((res) => {
+            setArticles(res.data);
+            })
+            .catch((err) => {
+            console.log('error');
+            });
+        };
+        getArticles();
   }, []);
 
   return (
@@ -118,7 +114,7 @@ const buttonApprove = (e) => {
                 <button className="approveButton" onClick={buttonApprove}>
                     Approve
                 </button>
-                <button className="rejectButton" onClick={buttonApprove}>
+                <button className="rejectButton" onClick={buttonReject}>
                     Reject
                 </button>
           </div>
