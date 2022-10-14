@@ -8,10 +8,15 @@ import HomeIcon from '@mui/icons-material/ArrowBack';
 const ModeratorDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
+  
+  function refreshPage() {
+    window.location.reload();
+  }
 
     //Approve Button Functionality - Updates status in database with "Approved"
     const buttonApprove = (e) => {
         e.preventDefault();
+        refreshPage();
 
         const articleDataApprove = {
             id: selectedRow.id,
@@ -44,6 +49,7 @@ const ModeratorDisplay = () => {
     //Reject Button Functionality- Updates status in database with "Rejected"
     const buttonReject = (e) => {
         e.preventDefault();
+        refreshPage();
 
         const articleDataReject = {
             id: selectedRow.id,
