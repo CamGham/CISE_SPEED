@@ -9,20 +9,9 @@ const ModeratorDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
 
-    function displayApprovedMessage()
-    {
-        document.getElementById("statusText").innerHTML = 'Approved';
-    }
-
-    function displayRejectedMessage()
-    {
-        document.getElementById("statusText").innerHTML = 'Rejected';
-    }
-
     //Approve Button Functionality - Updates status in database with "Approved"
     const buttonApprove = (e) => {
         e.preventDefault();
-        displayApprovedMessage();
 
         const articleDataApprove = {
             id: selectedRow.id,
@@ -34,7 +23,7 @@ const ModeratorDisplay = () => {
             version: selectedRow.version,
             pages: selectedRow.pages,
             doi: selectedRow.doi,
-            status: selectedRow[0].status = 'Approved',
+            status: selectedRow[0].status = 'approved',
             semethod: selectedRow.semethod,
             claim: selectedRow.claim,
             }
@@ -55,7 +44,6 @@ const ModeratorDisplay = () => {
     //Reject Button Functionality- Updates status in database with "Rejected"
     const buttonReject = (e) => {
         e.preventDefault();
-        displayRejectedMessage();
 
         const articleDataReject = {
             id: selectedRow.id,
@@ -67,7 +55,7 @@ const ModeratorDisplay = () => {
             version: selectedRow.version,
             pages: selectedRow.pages,
             doi: selectedRow.doi,
-            status: selectedRow[0].status = 'Rejected',
+            status: selectedRow[0].status = 'rejected',
             semethod: selectedRow.semethod,
             claim: selectedRow.claim,
             }
@@ -88,7 +76,7 @@ const ModeratorDisplay = () => {
     useEffect(() => {
         const getArticles = async () => {
         await axios
-            .get('http://localhost:8082/api/articles')
+            .get('http://localhost:8082/api/articles/pending')
             .then((res) => {
             setArticles(res.data);
             })
@@ -129,8 +117,6 @@ const ModeratorDisplay = () => {
                 <button className="rejectButton" onClick={buttonReject}>
                     Reject
                 </button>
-                <p>Selected Article Status:</p>
-                <span id="statusText">Pending</span>
           </div>
         </div>
       </div>

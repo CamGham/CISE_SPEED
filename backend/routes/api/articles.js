@@ -57,6 +57,18 @@ router.get('/accepted', async (req, res) => {
     );
 });
 
+// @route GET api/articles/pending
+// @description retrieves articles where status field is pending
+// @access Public
+router.get('/pending', async (req, res) => {
+  Article.find({ status: 'pending' })
+    .then((articles) => res.json(articles))
+    .catch((err) =>
+      res.status(404).json({ noarticlesfound: 'No articles found' })
+    );
+});
+
+
 // @route GET api/articles/:id
 // @description retrieve the article by its id
 // @access Public
