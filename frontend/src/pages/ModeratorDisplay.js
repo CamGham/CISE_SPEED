@@ -13,7 +13,7 @@ const ModeratorDisplay = () => {
     window.location.reload();
   }
 
-    //Approve Button Functionality - Updates status in database with "Approved"
+    //Approve Button Functionality - Updates status in database with "approved"
     const buttonApprove = (e) => {
         e.preventDefault();
         refreshPage();
@@ -46,7 +46,7 @@ const ModeratorDisplay = () => {
             })
     };
 
-    //Reject Button Functionality- Updates status in database with "Rejected"
+    //Reject Button Functionality- Updates status in database with "rejected"
     const buttonReject = (e) => {
         e.preventDefault();
         refreshPage();
@@ -64,34 +64,35 @@ const ModeratorDisplay = () => {
             status: selectedRow[0].status = 'rejected',
             semethod: selectedRow.semethod,
             claim: selectedRow.claim,
-            }
+        }
 
-            console.log(selectedRow[0].id);
-            console.log(selectedRow[0].status); 
+        console.log(selectedRow[0].id);
+        console.log(selectedRow[0].status); 
             
-            axios
-            .put('http://localhost:8082/api/articles/'+selectedRow[0].id, articleDataReject)
-            .then(res => {
-                console.log(articleDataReject);
-            })
-            .catch(err => {
+        axios
+        .put('http://localhost:8082/api/articles/'+selectedRow[0].id, articleDataReject)
+        .then(res => {
+            console.log(articleDataReject);
+        })
+        .catch(err => {
             console.log("Cannot update status");
-            })
+        })
     };
 
+    //GET only articles with status: "pending"
     useEffect(() => {
         const getArticles = async () => {
         await axios
             .get('http://localhost:8082/api/articles/pending')
             .then((res) => {
-            setArticles(res.data);
+                setArticles(res.data);
             })
             .catch((err) => {
-            console.log('error');
+                console.log('error');
             });
         };
         getArticles();
-  }, []);
+    }, []);
 
   return (
     <div className="doc">
@@ -114,8 +115,12 @@ const ModeratorDisplay = () => {
             Loading data...
           </h3>
         )}
+        
         <div className="buttonContainer">
             {/* Buttons to approve or reject article */}
+            <div className = "buttonHeader">
+                <p>Selected Article:</p>
+            </div>
             <div className="modOptions">
                 <button className="approveButton" onClick={buttonApprove}>
                     Approve

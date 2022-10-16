@@ -68,7 +68,6 @@ router.get('/pending', async (req, res) => {
     );
 });
 
-
 // @route GET api/articles/:id
 // @description retrieve the article by its id
 // @access Public
@@ -80,4 +79,4 @@ router.get('/:id', async (req, res) => {
     );
 });
 
-module.exports = router;
+module.exports = router; 

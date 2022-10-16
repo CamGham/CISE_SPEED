@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
   }
   
   .navCont {
@@ -34,12 +33,10 @@
     display: flex;
     flex-direction: row;
     width: 80%;
-    /* align-items: center; */
   }
 
   .buttonHeader {
     font-weight: bold;
-    
     text-align: center;
     width: 100%;
   }
@@ -64,7 +61,6 @@
     margin: 5px;
     padding: 10px;
     width: 35%;
-    
   }
 
   .approveButton > a {
@@ -76,6 +72,7 @@
     cursor: pointer;
     text-decoration: none;
   }
+
   .approveButton:hover {
     background-color: #3d71ff;
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
@@ -94,8 +91,8 @@
     margin: 5px;
     padding: 10px;
     width: 35%;
-    
   }
+
   .rejectButton > a {
     display: flex;
     align-items: center;
@@ -105,6 +102,7 @@
     cursor: pointer;
     text-decoration: none;
   }
+
   .rejectButton:hover {
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
