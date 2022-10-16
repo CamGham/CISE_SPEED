@@ -39,15 +39,15 @@ const ArticleSchema = new mongoose.Schema({
   },
   semethod: {
     type: String,
-    required: false,
+    required: true,
   },
   claim: {
     type: String,
-    required: false,
+    required: true,
   },
   result: {
-    type: Boolean,
-    required: true,
+    type: String,
+    required: false,
   },
   research: {
     type: String,

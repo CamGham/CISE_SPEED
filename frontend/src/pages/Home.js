@@ -16,6 +16,11 @@ const Home = () => {
             Create an Article
         </Link>
         </div>
+        <div className='button'>
+        <Link to="/accepted">
+            Analyse Articles
+        </Link>
+        </div>
     </div>
   )
 }

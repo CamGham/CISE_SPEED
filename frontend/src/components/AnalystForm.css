@@ -9,7 +9,7 @@
   display: grid;
   width: 800px;
   grid-template-columns: [first] 20% [second] auto[third] 20% [fourth];
-  grid-template-rows: repeat(10, 11% [col-start]);
+  grid-template-rows: repeat(13, 11% [col-start]);
 }
 .field {
   grid-column-start: second;
