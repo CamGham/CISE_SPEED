@@ -127,12 +127,13 @@ const ArticleDisplay = () => {
       <h1>Display</h1>
       <div className="navCont">
         <Link to="/">
-          <HomeIcon style={{ fontSize: '40px' }} />
+          <HomeIcon  style={{ fontSize: '40px' }} />
         </Link>
       </div>
       <div className="topCont">
         <div className="searchCont">
           <input
+          data-testid="search-bar"
             className="title-search"
             placeholder="Search by title"
             value={titleSearch}
@@ -147,7 +148,7 @@ const ArticleDisplay = () => {
         </div>
         {notFound && (
           <h3 style={{ marginLeft: '45px', color: 'red' }}>
-            Not articles found
+            No articles found
           </h3>
         )}
         <div className="dropdownCont">
