@@ -27,6 +27,17 @@ router.get('/filter', async (req, res) => {
     );
 });
 
+// @route GET api/articles/:status
+// @description retrieves articles by status field
+// @access Public
+router.get('/bytitle', async (req, res) => {
+  Article.find({ title: req.query.title })
+    .then((articles) => res.json(articles))
+    .catch((err) =>
+      res.status(404).json({ noarticlesfound: 'No articles found' })
+    );
+});
+
 // @route GET api/articles
 // @description create article
 // @access Public
