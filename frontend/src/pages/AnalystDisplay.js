@@ -12,10 +12,9 @@ const AnalystDisplay = () => {
   let navigate = useNavigate();
   const buttonTest = (e) => {
     e.preventDefault();
-    if(selectedRow.length === 1)
-    {
+    if (selectedRow.length === 1) {
       // console.log(selectedRow[0].id);
-      
+
       navigate(`/analyse/${selectedRow[0].id}`);
     }
   };
@@ -55,13 +54,15 @@ const AnalystDisplay = () => {
             Loading data...
           </h3>
         )}
-        <div className="buttonContainer">
-          <div className="analyse">
-            <button className="analyseButton" onClick={buttonTest}>
-              Analyse
-            </button>
+        {articles.length > 0 && (
+          <div className="buttonContainer">
+            <div className="analyse">
+              <button className="analyseButton" onClick={buttonTest}>
+                Analyse
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
