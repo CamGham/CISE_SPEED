@@ -48,7 +48,7 @@ const ArticleDisplay = () => {
 
   useEffect(() => {
     const getArticlesByFilter = async () => {
-      const myUrl = new URL('/api/articles/filter');
+      const myUrl = new URL('https://cise-speed-three-deploy.herokuapp.com/api/articles/filter');
       if (seMethod !== '') {
         myUrl.searchParams.append('semethod', seMethod);
       }
