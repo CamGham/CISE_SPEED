@@ -79,7 +79,6 @@ const ModeratorDisplay = () => {
         })
     };
 
-    //GET only articles with status: "pending"
     useEffect(() => {
         const getArticles = async () => {
         await axios
@@ -117,7 +116,7 @@ const ModeratorDisplay = () => {
         )}
         
         <div className="buttonContainer">
-            {/* Buttons to approve or reject article */}
+            {/*  Buttons to approve or reject article */}
             <div className = "buttonHeader">
                 <p>Selected Article:</p>
             </div>
