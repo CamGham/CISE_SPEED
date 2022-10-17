@@ -96,7 +96,7 @@ const ArticleDisplay = () => {
     setClaimShow(event.target.checked);
   };
 
-  const handleSemethodShow= (event) => {
+  const handleSemethodShow = (event) => {
     console.log(event);
     setSemethodShow(event.target.checked);
   };
@@ -140,13 +140,13 @@ const ArticleDisplay = () => {
       <h1>Display</h1>
       <div className="navCont">
         <Link to="/">
-          <HomeIcon  style={{ fontSize: '40px' }} />
+          <HomeIcon style={{ fontSize: '40px' }} />
         </Link>
       </div>
       <div className="topCont">
         <div className="searchCont">
           <input
-          data-testid="search-bar"
+            data-testid="search-bar"
             className="title-search"
             placeholder="Search by title"
             value={titleSearch}
@@ -177,9 +177,9 @@ const ArticleDisplay = () => {
               onChange={handleMethodChange}
             >
               <MenuItem value={''}>Show all</MenuItem>
-              <MenuItem value={'tdd'}>TDD</MenuItem>
-              <MenuItem value={'bdd'}>BDD</MenuItem>
-              <MenuItem value={'atdd'}>ATDD</MenuItem>
+              <MenuItem value={'TDD'}>TDD</MenuItem>
+              <MenuItem value={'BDD'}>BDD</MenuItem>
+              <MenuItem value={'ATDD'}>ATDD</MenuItem>
             </Select>
           </FormControl>
           <FormControl
@@ -291,13 +291,15 @@ const ArticleDisplay = () => {
           label="Year"
           control={<Checkbox checked={yearShow} onChange={handleYearChange} />}
         />
-             <FormControlLabel
+        <FormControlLabel
           label="Claim"
           control={<Checkbox checked={claimShow} onChange={handleClaimShow} />}
         />
-             <FormControlLabel
+        <FormControlLabel
           label="SE Method"
-          control={<Checkbox checked={semethodShow} onChange={handleSemethodShow} />}
+          control={
+            <Checkbox checked={semethodShow} onChange={handleSemethodShow} />
+          }
         />
       </div>
     </div>
