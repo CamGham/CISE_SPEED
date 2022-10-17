@@ -47,11 +47,32 @@ router.post('/', (req, res) => {
     .catch((err) => res.status(400).json({ error: 'Unable to add article' }));
 });
 
+
+// @update article, by passed ID
+router.put('/:id', async (req, res) => {
+  Article.findByIdAndUpdate(req.params.id, req.body)
+    .then((article) => res.json({ msg: 'status updated succesfully' }))
+    .catch((err) =>
+      res.status(400).json({ error: 'Unable to update status' })
+    );
+});
+
 // @route GET api/articles/accepted
 // @description retrieves articles where status field is accepted
 // @access Public
 router.get('/accepted', async (req, res) => {
   Article.find({ status: 'accepted' })
+    .then((articles) => res.json(articles))
+    .catch((err) =>
+      res.status(404).json({ noarticlesfound: 'No articles found' })
+    );
+});
+
+// @route GET api/articles/pending
+// @description retrieves articles where status field is pending
+// @access Public
+router.get('/pending', async (req, res) => {
+  Article.find({ status: 'pending' })
     .then((articles) => res.json(articles))
     .catch((err) =>
       res.status(404).json({ noarticlesfound: 'No articles found' })
