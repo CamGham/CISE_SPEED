@@ -14,8 +14,6 @@ const AnalystDisplay = () => {
     e.preventDefault();
     if(selectedRow.length === 1)
     {
-      // console.log(selectedRow[0].id);
-      
       navigate(`/analyse/${selectedRow[0].id}`);
     }
   };
