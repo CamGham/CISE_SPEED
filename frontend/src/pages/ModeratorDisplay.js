@@ -13,8 +13,8 @@ const ModeratorDisplay = () => {
     window.location.reload();
   }
 
-    //Approve Button Functionality - Updates status in database with "approved"
-    const buttonApprove = (e) => {
+    //Approve Button Functionality - Updates status in database with "accepted"
+    const buttonAccept = (e) => {
         e.preventDefault();
         refreshPage();
 
@@ -28,7 +28,7 @@ const ModeratorDisplay = () => {
             version: selectedRow.version,
             pages: selectedRow.pages,
             doi: selectedRow.doi,
-            status: selectedRow[0].status = 'approved',
+            status: selectedRow[0].status = 'accepted',
             semethod: selectedRow.semethod,
             claim: selectedRow.claim,
             }
@@ -121,8 +121,8 @@ const ModeratorDisplay = () => {
                 <p>Selected Article:</p>
             </div>
             <div className="modOptions">
-                <button className="approveButton" onClick={buttonApprove}>
-                    Approve
+                <button className="approveButton" onClick={buttonAccept}>
+                    Accept
                 </button>
                 <button className="rejectButton" onClick={buttonReject}>
                     Reject
