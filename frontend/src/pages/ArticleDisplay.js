@@ -112,7 +112,7 @@ const ArticleDisplay = () => {
     if (titleSearch === '') {
       getArticles();
     } else {
-      const myUrl = new URL('/api/articles/bytitle');
+      const myUrl = new URL('https://cise-speed-three-deploy.herokuapp.com/api/articles/bytitle');
       myUrl.searchParams.append('title', titleSearch);
       await axios
         .get(myUrl)

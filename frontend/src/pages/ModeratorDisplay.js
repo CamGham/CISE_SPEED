@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, History } from 'react-router-dom';
 import { TableGrid } from '../components/TableGrid';
 import './ModeratorDisplay.css';
 import HomeIcon from '@mui/icons-material/ArrowBack';
@@ -13,10 +13,21 @@ const ModeratorDisplay = () => {
     window.location.reload();
   }
 
+  const getArticles = async () => {
+    await axios
+      .get('/api/articles/pending')
+      .then((res) => {
+        setArticles(res.data);
+      })
+      .catch((err) => {
+        console.log('error');
+      });
+  };
+
   //Accept Button Functionality - Updates status in database with "accepted"
   const buttonAccept = (e) => {
     e.preventDefault();
-    refreshPage();
+    // refreshPage();
 
     const articleDataApprove = {
       id: selectedRow.id,
@@ -43,6 +54,7 @@ const ModeratorDisplay = () => {
       )
       .then((res) => {
         console.log(articleDataApprove);
+        getArticles();
       })
       .catch((err) => {
         console.log('Cannot update status');
@@ -86,16 +98,6 @@ const ModeratorDisplay = () => {
   };
 
   useEffect(() => {
-    const getArticles = async () => {
-      await axios
-        .get('/api/articles/pending')
-        .then((res) => {
-          setArticles(res.data);
-        })
-        .catch((err) => {
-          console.log('error');
-        });
-    };
     getArticles();
   }, []);
 
