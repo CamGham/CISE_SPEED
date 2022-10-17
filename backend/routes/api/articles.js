@@ -31,7 +31,7 @@ router.get('/filter', async (req, res) => {
 // @description retrieves articles by status field
 // @access Public
 router.get('/bytitle', async (req, res) => {
-  Article.find({ title: req.query.title })
+  Article.find({ title: req.query.title, status: 'completed' })
     .then((articles) => res.json(articles))
     .catch((err) =>
       res.status(404).json({ noarticlesfound: 'No articles found' })
@@ -42,11 +42,9 @@ router.get('/bytitle', async (req, res) => {
 router.put('/:id', async (req, res) => {
   Article.findByIdAndUpdate(req.params.id, req.body)
     .then((article) => res.json({ msg: 'status updated succesfully' }))
-    .catch((err) =>
-      res.status(400).json({ error: 'Unable to update status' })
-    );
+    .catch((err) => res.status(400).json({ error: 'Unable to update status' }));
 });
- 
+
 // @route GET api/articles/pending
 // @description retrieves articles where status field is pending
 // @access Public
@@ -78,6 +76,16 @@ router.get('/accepted', async (req, res) => {
     );
 });
 
+// @route GET api/articles/completed
+// @description retrieves articles where status field is completed
+// @access Public
+router.get('/completed', async (req, res) => {
+  Article.find({ status: 'completed' })
+    .then((articles) => res.json(articles))
+    .catch((err) =>
+      res.status(404).json({ noarticlesfound: 'No articles found' })
+    );
+});
 // @route GET api/articles/:id
 // @description retrieve the article by its id
 // @access Public
