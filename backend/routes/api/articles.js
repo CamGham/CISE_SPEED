@@ -79,4 +79,15 @@ router.get('/:id', async (req, res) => {
     );
 });
 
-module.exports = router; 
+// @route GET api/articles/:id
+// @description update the article by its id
+// @access Public
+router.put('/:id', async (req, res) => {
+  Article.findByIdAndUpdate(req.params.id, req.body)
+    .then((article) => res.json({ msg: 'Updated successfully' }))
+    .catch((err) =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
+});
+
+module.exports = router;

@@ -12,18 +12,10 @@ const AnalystDisplay = () => {
   let navigate = useNavigate();
   const buttonTest = (e) => {
     e.preventDefault();
-    console.log(selectedRow);
     if(selectedRow.length === 1)
     {
       // console.log(selectedRow[0].id);
-      axios
-      .get('http://localhost:8082/api/articles/'+selectedRow[0].id)
-      .then(res => {
-
-      })
-      .catch(err => {
-        console.log("Error from ShowBookDetails");
-      })
+      
       navigate(`/analyse/${selectedRow[0].id}`);
     }
   };
