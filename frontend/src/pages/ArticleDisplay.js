@@ -34,7 +34,7 @@ const ArticleDisplay = () => {
 
   const getArticles = async () => {
     await axios
-      .get('http://localhost:8082/api/articles/completed')
+      .get('/api/articles/completed')
       .then((res) => {
         setArticles(res.data);
       })
@@ -48,7 +48,7 @@ const ArticleDisplay = () => {
 
   useEffect(() => {
     const getArticlesByFilter = async () => {
-      const myUrl = new URL('http://localhost:8082/api/articles/filter');
+      const myUrl = new URL('/api/articles/filter');
       if (seMethod !== '') {
         myUrl.searchParams.append('semethod', seMethod);
       }
@@ -112,7 +112,7 @@ const ArticleDisplay = () => {
     if (titleSearch === '') {
       getArticles();
     } else {
-      const myUrl = new URL('http://localhost:8082/api/articles/bytitle');
+      const myUrl = new URL('/api/articles/bytitle');
       myUrl.searchParams.append('title', titleSearch);
       await axios
         .get(myUrl)

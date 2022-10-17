@@ -12,7 +12,7 @@ const AnalystArticle = () => {
 
   const getData = async () => {
     await axios
-      .get('http://localhost:8082/api/articles/' + id)
+      .get('/api/articles/' + id)
       .then((res) => {
         setData(res.data);
         console.log(res.data);

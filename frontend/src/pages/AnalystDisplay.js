@@ -22,7 +22,7 @@ const AnalystDisplay = () => {
   useEffect(() => {
     const getArticles = async () => {
       await axios
-        .get('http://localhost:8082/api/articles/accepted')
+        .get('/api/articles/accepted')
         .then((res) => {
           setArticles(res.data);
         })

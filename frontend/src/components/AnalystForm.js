@@ -70,7 +70,7 @@ const AnalystForm = (props) => {
     //on submission of form
     onSubmit: (values) => {
       axios
-        .put('http://localhost:8082/api/articles/' + ID, values)
+        .put('/api/articles/' + ID, values)
         .then((res) => {
           formik.resetForm();
           alert('Article completed');

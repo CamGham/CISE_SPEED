@@ -41,7 +41,7 @@ const SubForm = () => {
     //on submission of form
     onSubmit: (values) => {
       axios
-        .post('http://localhost:8082/api/articles', values)
+        .post('/api/articles', values)
         .then((res) => {
           formik.resetForm();
         })

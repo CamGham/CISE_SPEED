@@ -38,7 +38,7 @@ const ModeratorDisplay = () => {
 
     axios
       .put(
-        'http://localhost:8082/api/articles/' + selectedRow[0].id,
+        '/api/articles/' + selectedRow[0].id,
         articleDataApprove
       )
       .then((res) => {
@@ -74,7 +74,7 @@ const ModeratorDisplay = () => {
 
     axios
       .put(
-        'http://localhost:8082/api/articles/' + selectedRow[0].id,
+        '/api/articles/' + selectedRow[0].id,
         articleDataReject
       )
       .then((res) => {
@@ -88,7 +88,7 @@ const ModeratorDisplay = () => {
   useEffect(() => {
     const getArticles = async () => {
       await axios
-        .get('http://localhost:8082/api/articles/pending')
+        .get('/api/articles/pending')
         .then((res) => {
           setArticles(res.data);
         })
