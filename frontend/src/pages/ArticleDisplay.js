@@ -177,9 +177,9 @@ const ArticleDisplay = () => {
               onChange={handleMethodChange}
             >
               <MenuItem value={''}>Show all</MenuItem>
-              <MenuItem value={'tdd'}>TDD</MenuItem>
-              <MenuItem value={'bdd'}>BDD</MenuItem>
-              <MenuItem value={'atdd'}>ATDD</MenuItem>
+              <MenuItem value={'TDD'}>TDD</MenuItem>
+              <MenuItem value={'BDD'}>BDD</MenuItem>
+              <MenuItem value={'ATDD'}>ATDD</MenuItem>
             </Select>
           </FormControl>
           <FormControl
