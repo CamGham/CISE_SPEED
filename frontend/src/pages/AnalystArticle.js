@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const AnalystArticle = () => {
   const { id } = useParams();
-
   const [data, setData] = useState([]);
 
   const getData = async () => {
@@ -41,8 +40,6 @@ const AnalystArticle = () => {
         {data ? <AnalystForm data={data} /> : 
         <h2>Loading</h2>
         }
-        
-
       </div>
     </div>
   );

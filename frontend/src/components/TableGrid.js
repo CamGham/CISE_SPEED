@@ -68,23 +68,14 @@ export const TableGrid = (props) => {
         disableColumnMenu={true}
         density={'compact'}
         pageSize={8}
-
-
-
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
           const selectedRows = rows.filter((row) =>
             selectedIDs.has(row.id),
           );
-
           setSelectedRow(selectedRows);
         }}
-
-
-       
         rowsPerPageOptions={[8, 10, 20]}
-        
-
       />
     </div>
   );

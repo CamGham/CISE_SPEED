@@ -26,7 +26,6 @@ const ArticleDisplay = () => {
   const [doiShow, setDoiShow] = useState(true);
   const [claimShow, setClaimShow] = useState(true);
   const [semethodShow, setSemethodShow] = useState(true);
-
   const [seMethod, setSeMethod] = useState('');
   const [claim, setClaim] = useState('');
   const [titleSearch, setTitleSearch] = useState();
@@ -42,6 +41,7 @@ const ArticleDisplay = () => {
         console.log('error');
       });
   };
+
   useEffect(() => {
     getArticles();
   }, []);
@@ -212,11 +212,6 @@ const ArticleDisplay = () => {
           reset filters
         </button>
       </div>
-      {/* <div className='yearsCont'>
-        <b>years: </b>
-        <input placeholder="from"></input>-<input placeholder="to"></input>
-        <button>show</button>
-      </div> */}
       {articles.length > 0 ? (
         <div className="tableCont">
           <TableGrid

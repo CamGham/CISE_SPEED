@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link, History } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { TableGrid } from '../components/TableGrid';
 import './ModeratorDisplay.css';
 import HomeIcon from '@mui/icons-material/ArrowBack';
@@ -8,10 +8,6 @@ import HomeIcon from '@mui/icons-material/ArrowBack';
 const ModeratorDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
-
-  function refreshPage() {
-    window.location.reload();
-  }
 
   const getArticles = async () => {
     await axios
@@ -27,7 +23,6 @@ const ModeratorDisplay = () => {
   //Accept Button Functionality - Updates status in database with "accepted"
   const buttonAccept = (e) => {
     e.preventDefault();
-    // refreshPage();
 
     const articleDataApprove = {
       id: selectedRow.id,
@@ -44,16 +39,12 @@ const ModeratorDisplay = () => {
       claim: selectedRow.claim,
     };
 
-    console.log(selectedRow[0].id);
-    console.log(selectedRow[0].status);
-
     axios
       .put(
         '/api/articles/' + selectedRow[0].id,
         articleDataApprove
       )
       .then((res) => {
-        console.log(articleDataApprove);
         getArticles();
       })
       .catch((err) => {
@@ -64,7 +55,6 @@ const ModeratorDisplay = () => {
   //Reject Button Functionality- Updates status in database with "rejected"
   const buttonReject = (e) => {
     e.preventDefault();
-    refreshPage();
 
     const articleDataReject = {
       id: selectedRow.id,
@@ -81,16 +71,13 @@ const ModeratorDisplay = () => {
       claim: selectedRow.claim,
     };
 
-    console.log(selectedRow[0].id);
-    console.log(selectedRow[0].status);
-
     axios
       .put(
         '/api/articles/' + selectedRow[0].id,
         articleDataReject
       )
       .then((res) => {
-        console.log(articleDataReject);
+        getArticles();
       })
       .catch((err) => {
         console.log('Cannot update status');

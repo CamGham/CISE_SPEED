@@ -10,11 +10,10 @@ const AnalystDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
   let navigate = useNavigate();
+
   const buttonTest = (e) => {
     e.preventDefault();
     if (selectedRow.length === 1) {
-      // console.log(selectedRow[0].id);
-
       navigate(`/analyse/${selectedRow[0].id}`);
     }
   };
