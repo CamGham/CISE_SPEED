@@ -48,7 +48,7 @@
     width: 100%;
   }
 
-  .approveButton {
+  .acceptButton {
     color: white;
     height: 70%;
     font-weight: bold;
@@ -63,7 +63,7 @@
     width: 35%;
   }
 
-  .approveButton > a {
+  .acceptButton > a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +73,7 @@
     text-decoration: none;
   }
 
-  .approveButton:hover {
+  .acceptButton:hover {
     background-color: #3d71ff;
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
   }
