@@ -8,90 +8,96 @@ import HomeIcon from '@mui/icons-material/ArrowBack';
 const ModeratorDisplay = () => {
   const [articles, setArticles] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
-  
+
   function refreshPage() {
     window.location.reload();
   }
 
-    //Accept Button Functionality - Updates status in database with "accepted"
-    const buttonAccept = (e) => {
-        e.preventDefault();
-        refreshPage();
+  //Accept Button Functionality - Updates status in database with "accepted"
+  const buttonAccept = (e) => {
+    e.preventDefault();
+    refreshPage();
 
-        const articleDataApprove = {
-            id: selectedRow.id,
-            title: selectedRow.title,
-            authors: selectedRow.authors,
-            journal: selectedRow.journal,
-            year: selectedRow.year,
-            volume: selectedRow.volume,
-            version: selectedRow.version,
-            pages: selectedRow.pages,
-            doi: selectedRow.doi,
-            status: selectedRow[0].status = 'accepted',
-            semethod: selectedRow.semethod,
-            claim: selectedRow.claim,
-            }
-
-            console.log(selectedRow[0].id);
-            console.log(selectedRow[0].status); 
-            
-            axios
-            .put('http://localhost:8082/api/articles/'+selectedRow[0].id, articleDataApprove)
-            .then(res => {
-                console.log(articleDataApprove);
-            })
-            .catch(err => {
-            console.log("Cannot update status");
-            })
+    const articleDataApprove = {
+      id: selectedRow.id,
+      title: selectedRow.title,
+      authors: selectedRow.authors,
+      journal: selectedRow.journal,
+      year: selectedRow.year,
+      volume: selectedRow.volume,
+      version: selectedRow.version,
+      pages: selectedRow.pages,
+      doi: selectedRow.doi,
+      status: (selectedRow[0].status = 'accepted'),
+      semethod: selectedRow.semethod,
+      claim: selectedRow.claim,
     };
 
-    //Reject Button Functionality- Updates status in database with "rejected"
-    const buttonReject = (e) => {
-        e.preventDefault();
-        refreshPage();
+    console.log(selectedRow[0].id);
+    console.log(selectedRow[0].status);
 
-        const articleDataReject = {
-            id: selectedRow.id,
-            title: selectedRow.title,
-            authors: selectedRow.authors,
-            journal: selectedRow.journal,
-            year: selectedRow.year,
-            volume: selectedRow.volume,
-            version: selectedRow.version,
-            pages: selectedRow.pages,
-            doi: selectedRow.doi,
-            status: selectedRow[0].status = 'rejected',
-            semethod: selectedRow.semethod,
-            claim: selectedRow.claim,
-        }
+    axios
+      .put(
+        'http://localhost:8082/api/articles/' + selectedRow[0].id,
+        articleDataApprove
+      )
+      .then((res) => {
+        console.log(articleDataApprove);
+      })
+      .catch((err) => {
+        console.log('Cannot update status');
+      });
+  };
 
-        console.log(selectedRow[0].id);
-        console.log(selectedRow[0].status); 
-            
-        axios
-        .put('http://localhost:8082/api/articles/'+selectedRow[0].id, articleDataReject)
-        .then(res => {
-            console.log(articleDataReject);
-        })
-        .catch(err => {
-            console.log("Cannot update status");
-        })
+  //Reject Button Functionality- Updates status in database with "rejected"
+  const buttonReject = (e) => {
+    e.preventDefault();
+    refreshPage();
+
+    const articleDataReject = {
+      id: selectedRow.id,
+      title: selectedRow.title,
+      authors: selectedRow.authors,
+      journal: selectedRow.journal,
+      year: selectedRow.year,
+      volume: selectedRow.volume,
+      version: selectedRow.version,
+      pages: selectedRow.pages,
+      doi: selectedRow.doi,
+      status: (selectedRow[0].status = 'rejected'),
+      semethod: selectedRow.semethod,
+      claim: selectedRow.claim,
     };
 
-    useEffect(() => {
-        const getArticles = async () => {
-        await axios
-            .get('http://localhost:8082/api/articles/pending')
-            .then((res) => {
-                setArticles(res.data);
-            })
-            .catch((err) => {
-                console.log('error');
-            });
-        };
-        getArticles();
-    }, []);
+    console.log(selectedRow[0].id);
+    console.log(selectedRow[0].status);
+
+    axios
+      .put(
+        'http://localhost:8082/api/articles/' + selectedRow[0].id,
+        articleDataReject
+      )
+      .then((res) => {
+        console.log(articleDataReject);
+      })
+      .catch((err) => {
+        console.log('Cannot update status');
+      });
+  };
+
+  useEffect(() => {
+    const getArticles = async () => {
+      await axios
+        .get('http://localhost:8082/api/articles/pending')
+        .then((res) => {
+          setArticles(res.data);
+        })
+        .catch((err) => {
+          console.log('error');
+        });
+    };
+    getArticles();
+  }, []);
 
   return (
     <div className="doc">
@@ -114,21 +120,23 @@ const ModeratorDisplay = () => {
             Loading data...
           </h3>
         )}
-        
-        <div className="buttonContainer">
+
+        {articles.length > 0 && (
+          <div className="buttonContainer">
             {/*  Buttons to approve or reject article */}
-            <div className = "buttonHeader">
-                <p>Selected Article:</p>
+            <div className="buttonHeader">
+              <p>Selected Article:</p>
             </div>
             <div className="modOptions">
-                <button className="acceptButton" onClick={buttonAccept}>
-                    Accept
-                </button>
-                <button className="rejectButton" onClick={buttonReject}>
-                    Reject
-                </button>
+              <button className="acceptButton" onClick={buttonAccept}>
+                Accept
+              </button>
+              <button className="rejectButton" onClick={buttonReject}>
+                Reject
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
