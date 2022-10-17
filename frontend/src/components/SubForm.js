@@ -21,7 +21,7 @@ const SubForm = () => {
       status: 'pending',
       semethod: '',
       claim: '',
-      result: true,
+      result: '',
       research: '',
       participant: '',
     },
@@ -35,18 +35,19 @@ const SubForm = () => {
       version: Yup.number().required('Required'),
       pages: Yup.string().required('Required'),
       doi: Yup.string().required('Required'),
+      semethod: Yup.string().required('Required'),
+      claim: Yup.string().required('Required'),
     }),
     //on submission of form
     onSubmit: (values) => {
       axios
-        .post('http://localhost:8082/api/articles', values)
+        .post('/api/articles', values)
         .then((res) => {
           formik.resetForm();
         })
         .catch((err) => {
           console.log('error when submitting: ' + err);
         });
-      // alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -77,7 +78,7 @@ const SubForm = () => {
           status: 'pending',
           semethod: '',
           claim: '',
-          result: true,
+          result: '',
           research: '',
           participant: '',
         };
@@ -94,7 +95,7 @@ const SubForm = () => {
           status: 'pending',
           semethod: '',
           claim: '',
-          result: true,
+          result: '',
           research: '',
           participant: '',
         };
@@ -249,6 +250,47 @@ const SubForm = () => {
             <div className="error">{formik.errors.doi}</div>
           ) : null}
         </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="semethod"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.semethod}
+          >
+            <option value="">Select SE Method</option>
+            <option value="TDD">TDD</option>
+            <option value="BDD">BDD</option>
+            <option value="ATDD">ATDD</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.semethod && formik.errors.semethod ? (
+            <div className="error">{formik.errors.semethod}</div>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <select
+            type="text"
+            name="claim"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.claim}
+          >
+            <option value="">Select Claim</option>
+            <option value="Improves product quality">Improves product quality</option>
+            <option value="Improves code quality">Improves code quality</option>
+            <option value="Improves team confidence">Improves team confidence</option>
+          </select>
+        </div>
+        <div className="errCon">
+          {formik.touched.claim && formik.errors.claim ? (
+            <div className="error">{formik.errors.claim}</div>
+          ) : null}
+        </div>
+
         <div className="submit">
           <input type="submit" />
         </div>

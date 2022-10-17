@@ -23,10 +23,44 @@
 }
 
 .dropdownCont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-top: 30px;
+}
+
+.topCont {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.title-search {
+    height: 52px;
+    background-color: #ffff;
+    border-radius: 2px;
+    /* margin-right: 10px; */
+
+}
+
+.searchCont {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+
 }
 
 .filterHeader {
     display: flex;
     justify-content: center;
 }
+
+.reset-button {
+    height: 40px;
+    border-radius: 10px;
+    background-color: #3369ff;
+    transition: 0.3s all;
+    color: #ffff;
+    border-style: none;    
+}
+

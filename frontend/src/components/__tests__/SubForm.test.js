@@ -48,6 +48,6 @@ test('validation of empty fields', async () => {
   user.click(submitButton);
 
   await waitFor(() => {
-    expect(screen.getAllByText('Required')).toHaveLength(8);
+    expect(screen.getAllByText('Required')).toHaveLength(10);
   });
 });
